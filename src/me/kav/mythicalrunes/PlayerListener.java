@@ -333,13 +333,16 @@ public class PlayerListener implements Listener, hashmaps {
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					player.sendMessage(ChatColor.AQUA + "As you use this mythical rune, it shatters into pieces.");
+					player.setAllowFlight(true);
 					player.setFlying(true);
 					new BukkitRunnable() {
 
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
+							
 							player.setFlying(false);
+							player.setAllowFlight(false);
 							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
 							player.sendMessage(ChatColor.RED + "The effects of the rune of flying have run out");
 
@@ -1106,19 +1109,23 @@ public class PlayerListener implements Listener, hashmaps {
 					arrow.remove();
 
 				} else if (molotov.containsKey(player)) {
-					
+					final int RADIUS = 2;
 					Location center = arrow.getLocation();
 				    final List<Block> burn = new ArrayList<Block>();
-				    int y = arrow.getLocation().getBlockY();
-				    int x = arrow.getLocation().getBlockX();
-				    int z = arrow.getLocation().getBlockZ();
-				    for (x = - 5; x <= 5; x++) {
-				        for (z = -5; z <= 5; z++) {
-				            Block block = event.getEntity().getWorld().getBlockAt(x, y, z);
-				            if (block.getType() != Material.AIR)
-				                continue;
-				            block.setType(Material.FIRE);
-				            burn.add(block);
+				    int posX = arrow.getLocation().getBlockX();
+			        int posY = arrow.getLocation().getBlockY();
+			        int posZ = arrow.getLocation().getBlockZ();
+			        int x = arrow.getLocation().getBlockX();
+			        int y = arrow.getLocation().getBlockY();
+			        int z = arrow.getLocation().getBlockZ();
+			        for (x = -RADIUS; x <= RADIUS; x++) {
+			            for (z = -RADIUS; z <= RADIUS; z++) {
+			                Block block = event.getEntity().getWorld().getBlockAt(posX + x, y, posZ + z);
+			                if (block.getType() != Material.AIR)
+			                    continue;
+			                block.setType(Material.FIRE);
+			                burn.add(block);
+			            
 				        }
 				    }
 				 
