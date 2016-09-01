@@ -31,6 +31,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -94,6 +95,7 @@ public class PlayerListener implements Listener, hashmaps {
 	String runeofflying = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Flying";
 	String runeoffirespreading = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Fire Spreading";
 	String runeofflamethrowing = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Flame Throwing";
+	String runeofrepellant = ChatColor.GOLD + ChatColor.BOLD.toString() + "Rune of Repellant";
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
@@ -149,7 +151,60 @@ public class PlayerListener implements Listener, hashmaps {
 				}
 			
 				
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflamethrowing)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofrepellant)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(ChatColor.GOLD + "As you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					ShieldEffect bleedEffect = new ShieldEffect(em);
+					bleedEffect.setEntity(event.getPlayer());
+					// Bleeding takes 15 seconds
+					// period * iterations = time of effect
+					bleedEffect.iterations = 20 * 20;
+					bleedEffect.particle = ParticleEffect.SPELL_MOB;
+					bleedEffect.color = Color.ORANGE;
+					bleedEffect.start();
+					Player repeller = player;
+				
+					Integer task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
+						
+						@Override
+						public void run() {
+							List <Entity> entities = player.getNearbyEntities(2,0,2);
+							for(Entity e : entities){
+							if(e.getType().isAlive()) {
+								Vector dir = e.getLocation().getDirection();
+						          Vector vec = new Vector(dir.getX() * -1.5D, 1D, dir.getZ() * -1.5D);
+						         e.setVelocity(vec);
+						         if (e instanceof Player) {
+						        	 Player pp = (Player) e;
+						        	 pp.sendMessage(ChatColor.GOLD + "You have been repelled by " +ChatColor.YELLOW + repeller);
+						         }
+							}
+							}
+						}
+					
+					}, 10L, 5L);
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+							alreadyused.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							bleedEffect.cancel();
+							Bukkit.getServer().getScheduler().cancelTask(task1);
+
+						}
+					}.runTaskLater(this.plugin, 300);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			}
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflamethrowing)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
