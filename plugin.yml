@@ -1,0 +1,10 @@
+name: MythicalRunes
+version: 2.0
+main:  me.kav.mythicalrunes.Main
+commands:
+   mm:
+      description: Get all the runes lolz
+      usage: /<command>
+   hellohello:
+      description: testing utils
+      usage: /<command>
