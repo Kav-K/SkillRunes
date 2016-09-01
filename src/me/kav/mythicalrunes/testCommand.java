@@ -186,6 +186,13 @@ public class testCommand implements CommandExecutor, hashmaps {
 		loreList.add(ChatColor.GRAY + "Right click to use");
 		item.setItemMeta(im);
 		inventory.addItem(item);
+		im.setDisplayName(ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Fire Spreading");
+		loreList.clear();
+		loreList.add(ChatColor.GRAY + "Harness the power embedded in this mythical rune");
+		loreList.add(ChatColor.GRAY + "To spread fire with your arrows");
+		loreList.add(ChatColor.GRAY + "Right click to use");
+		item.setItemMeta(im);
+		inventory.addItem(item);
 		String test = ChatColor.RED + "displayName";
 		if (item.getItemMeta().getDisplayName().equals(test)) {
 			player.sendMessage("no!");

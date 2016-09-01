@@ -1,6 +1,8 @@
 package me.kav.mythicalrunes;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -8,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -88,6 +91,7 @@ public class PlayerListener implements Listener, hashmaps {
 	String runeofleaping = ChatColor.BLUE + ChatColor.BOLD.toString() + "Rune of Leaping";
 	String linuxcowboyrune = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Linux's Cowboy Rune Of Gay";
 	String runeofflying = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Flying";
+	String runeoffirespreading = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Fire Spreading";
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
@@ -141,7 +145,31 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofincineration)) {
+			}   else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoffirespreading)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(ChatColor.RED + "As you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					molotov.put(player, player);
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+							alreadyused.remove(player, player);
+							molotov.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+
+						}
+					}.runTaskLater(this.plugin, 200);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			}
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofincineration)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -849,7 +877,8 @@ public class PlayerListener implements Listener, hashmaps {
 					}
 				}.runTaskLater(this.plugin, 400);
 
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofextremepower)) {
+			}  
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofextremepower)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1066,6 +1095,7 @@ public class PlayerListener implements Listener, hashmaps {
 			Entity shooter = arrow.getShooter();
 			if ((shooter instanceof Player)) {
 				Player player = (Player) shooter;
+				
 				if (explosivearrows.containsKey(player)) {
 
 					arrow.getWorld().playEffect(arrow.getLocation(), org.bukkit.Effect.LARGE_SMOKE, 0);
@@ -1075,6 +1105,33 @@ public class PlayerListener implements Listener, hashmaps {
 					tnt.setFuseTicks(3);
 					arrow.remove();
 
+				} else if (molotov.containsKey(player)) {
+					
+					Location center = arrow.getLocation();
+				    final List<Block> burn = new ArrayList<Block>();
+				    int y = arrow.getLocation().getBlockY();
+				    int x = arrow.getLocation().getBlockX();
+				    int z = arrow.getLocation().getBlockZ();
+				    for (x = - 5; x <= 5; x++) {
+				        for (z = -5; z <= 5; z++) {
+				            Block block = event.getEntity().getWorld().getBlockAt(x, y, z);
+				            if (block.getType() != Material.AIR)
+				                continue;
+				            block.setType(Material.FIRE);
+				            burn.add(block);
+				        }
+				    }
+				 
+				    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+				 
+				        @Override
+				        public void run() {
+				            for (Block block : burn)
+				                if (block.getType() == Material.FIRE)
+				                    block.setType(Material.AIR);
+				        }
+				 
+				    }, 60L);
 				}
 			}
 		}

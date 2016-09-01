@@ -13,4 +13,5 @@ public interface hashmaps {
     public static HashMap<Player, Player> barrage = new HashMap<Player, Player>();
     public static HashMap<Player, Player> explosivearrows = new HashMap<Player, Player>();
     public static HashMap<Player, Player> thorns = new HashMap<Player, Player>();
+      public static HashMap<Player, Player> molotov = new HashMap<Player, Player>();
 }
