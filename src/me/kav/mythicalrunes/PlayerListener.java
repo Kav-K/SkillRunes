@@ -88,6 +88,7 @@ public class PlayerListener implements Listener, hashmaps {
 	String runeofleaping = ChatColor.BLUE + ChatColor.BOLD.toString() + "Rune of Leaping";
 	String linuxcowboyrune = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Linux's Cowboy Rune Of Gay";
 	String runeofflying = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Flying";
+	String i = "test";
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
