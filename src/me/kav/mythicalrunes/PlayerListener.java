@@ -14,6 +14,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -92,6 +93,7 @@ public class PlayerListener implements Listener, hashmaps {
 	String linuxcowboyrune = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Linux's Cowboy Rune Of Gay";
 	String runeofflying = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Flying";
 	String runeoffirespreading = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Fire Spreading";
+	String runeofflamethrowing = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Flame Throwing";
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
@@ -145,7 +147,33 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			}   else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoffirespreading)) {
+			
+				
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflamethrowing)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(ChatColor.RED + "As you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					fireball.put(player, player);
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+							alreadyused.remove(player, player);
+							fireball.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+
+						}
+					}.runTaskLater(this.plugin, 200);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			}
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoffirespreading)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -155,13 +183,24 @@ public class PlayerListener implements Listener, hashmaps {
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					alreadyused.put(player, player);
 					molotov.put(player, player);
+					ConeEffect smokeEffect = new ConeEffect(em);
+					smokeEffect.setEntity(player);
+
+					// Bleeding takes 15 seconds
+					// period * iterations = time of effect
+					smokeEffect.iterations = 20 * 20; // there is an
+
+					smokeEffect.start();
+					
 					new BukkitRunnable() {
+						
 
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
 							molotov.remove(player, player);
 							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							smokeEffect.cancel();
 
 						}
 					}.runTaskLater(this.plugin, 200);
@@ -1008,6 +1047,15 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
+			}
+		} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK || act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK) {
+			
+			Player player = event.getPlayer();
+			if (player.getInventory().getItemInHand().getType() == Material.AIR) {
+			if (fireball.containsKey(player)) {
+				player.launchProjectile(Fireball.class);
+
+			}
 			}
 		}
 	}
