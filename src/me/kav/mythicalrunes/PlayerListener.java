@@ -1,10 +1,7 @@
 package me.kav.mythicalrunes;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,8 +9,10 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -27,35 +26,24 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import de.slikey.effectlib.EffectManager;
-import de.slikey.effectlib.effect.ArcEffect;
 import de.slikey.effectlib.effect.AtomEffect;
-import de.slikey.effectlib.effect.BleedEffect;
 import de.slikey.effectlib.effect.ConeEffect;
-import de.slikey.effectlib.effect.DnaEffect;
 import de.slikey.effectlib.effect.EarthEffect;
-import de.slikey.effectlib.effect.FountainEffect;
 import de.slikey.effectlib.effect.ShieldEffect;
 import de.slikey.effectlib.effect.SmokeEffect;
-import de.slikey.effectlib.effect.TurnEffect;
-import de.slikey.effectlib.effect.VortexEffect;
 import de.slikey.effectlib.effect.WarpEffect;
 import de.slikey.effectlib.effect.WaveEffect;
 import de.slikey.effectlib.util.ParticleEffect;
 
 import org.bukkit.Color;
-import org.bukkit.Effect;
 
 public class PlayerListener implements Listener, hashmaps {
 
@@ -99,7 +87,11 @@ public class PlayerListener implements Listener, hashmaps {
 	String runeofrepellant = ChatColor.GOLD + ChatColor.BOLD.toString() + "Rune of Repellant";
 	String runeoflightningarrows = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Rune of Lightning Arrows";
 	String runeofpoisonousarrows = ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "Rune of Poisonous Arrows";
-
+	String runeofhaste = ChatColor.GRAY + ChatColor.BOLD.toString() + "Rune of Haste";
+    String runeofcrippling = ChatColor.DARK_GRAY + ChatColor.BOLD.toString() + "Rune of Crippling";
+    String runeofminions = ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "Rune of Minions";
+	
+	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
 		Action act = event.getAction();
@@ -202,7 +194,27 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofrepellant)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofcrippling)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(
+							ChatColor.DARK_PURPLE + "As you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					crippling.put(player, player);
+				}
+				new BukkitRunnable() {
+					public void run() {
+						player.sendMessage(ChatColor.RED + "The effects of the rune of crippling have run out");
+						crippling.remove(player, player);
+						alreadyused.remove(player, player);
+					}
+				}.runTaskLater(this.plugin, 300);
+			}
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofrepellant)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -468,7 +480,37 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflying)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofminions)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					alreadyused.put(player, player);
+					player.sendMessage(ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "As you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					for (Entity e : player.getNearbyEntities(3, 256, 3)) {
+						if (e instanceof Player) {
+							WarpEffect smokeEffect = new WarpEffect(em);
+							Player found = (Player) e;
+							Creature z = (Creature) e.getWorld().spawnEntity(e.getLocation(), EntityType.IRON_GOLEM);
+							z.setTarget((LivingEntity) e);
+							new BukkitRunnable() {
+								public void run() {
+									z.remove();
+								}
+							}.runTaskLater(this.plugin, 600);
+							new BukkitRunnable() {
+								public void run() {
+									alreadyused.remove(player, player);
+								}
+							}.runTaskLater(this.plugin, 600);
+						}
+					}
+					
+				}
+			}
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflying)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1103,6 +1145,25 @@ public class PlayerListener implements Listener, hashmaps {
 					}.runTaskLater(this.plugin, 200);
 
 				}
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofhaste)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					player.sendMessage(ChatColor.RED + "As you use this mythical rune, it shatters into pieces.");
+					alreadyused.put(player, player);
+					player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 400, 1));
+					new BukkitRunnable() {
+						@Override
+						public void run() {
+							alreadyused.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							
+						}
+					}.runTaskLater(this.plugin, 400);
+				}
 			}
 
 			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofwither)) {
@@ -1213,6 +1274,9 @@ public class PlayerListener implements Listener, hashmaps {
 					damager.sendMessage(
 							ChatColor.DARK_PURPLE + "You have been injured due to your opponent's active thorns rune!");
 
+				} else if (crippling.containsKey(player)) {
+					Player damager = (Player) event.getDamager();
+					damager.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 40, 0));
 				}
 			}
 		}
