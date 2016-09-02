@@ -15,4 +15,6 @@ public interface hashmaps {
     public static HashMap<Player, Player> thorns = new HashMap<Player, Player>();
       public static HashMap<Player, Player> molotov = new HashMap<Player, Player>();
     public static HashMap<Player, Player> fireball = new HashMap<Player, Player>();
+    public static HashMap<Player, Player> lightning = new HashMap<Player, Player>();
+    public static HashMap<Player, Player> poison = new HashMap<Player, Player>();
 }

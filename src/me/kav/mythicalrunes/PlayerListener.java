@@ -15,6 +15,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -96,6 +97,8 @@ public class PlayerListener implements Listener, hashmaps {
 	String runeoffirespreading = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Fire Spreading";
 	String runeofflamethrowing = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Flame Throwing";
 	String runeofrepellant = ChatColor.GOLD + ChatColor.BOLD.toString() + "Rune of Repellant";
+	String runeoflightningarrows = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Rune of Lightning Arrows";
+	String runeofpoisonousarrows = ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "Rune of Poisonous Arrows";
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
@@ -149,8 +152,56 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			
-				
+
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoflightningarrows)) {
+				if (!(alreadyused.containsKey(player))) {
+
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(ChatColor.YELLOW + "AS you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					lightning.put(player, player);
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+							alreadyused.remove(player, player);
+							lightning.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+
+						}
+					}.runTaskLater(this.plugin, 300);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofpoisonousarrows)) {
+				if (!(alreadyused.containsKey(player))) {
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(
+							ChatColor.DARK_PURPLE + "As you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					poison.put(player, player);
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+							alreadyused.remove(player, player);
+							poison.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+
+						}
+					}.runTaskLater(this.plugin, 300);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
 			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofrepellant)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -169,26 +220,29 @@ public class PlayerListener implements Listener, hashmaps {
 					bleedEffect.color = Color.ORANGE;
 					bleedEffect.start();
 					Player repeller = player;
-				
-					Integer task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
-						
-						@Override
-						public void run() {
-							List <Entity> entities = player.getNearbyEntities(2,0,2);
-							for(Entity e : entities){
-							if(e.getType().isAlive()) {
-								Vector dir = e.getLocation().getDirection();
-						          Vector vec = new Vector(dir.getX() * -1.5D, 1D, dir.getZ() * -1.5D);
-						         e.setVelocity(vec);
-						         if (e instanceof Player) {
-						        	 Player pp = (Player) e;
-						        	 pp.sendMessage(ChatColor.GOLD + "You have been repelled by " +ChatColor.YELLOW + repeller);
-						         }
-							}
-							}
-						}
-					
-					}, 10L, 5L);
+
+					Integer task1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin,
+							new Runnable() {
+
+								@Override
+								public void run() {
+									List<Entity> entities = player.getNearbyEntities(2, 0, 2);
+									for (Entity e : entities) {
+										if (e.getType().isAlive()) {
+											Vector dir = e.getLocation().getDirection();
+											Vector vec = new Vector(dir.getX() * -1.5D, 1D, dir.getZ() * -1.5D);
+											e.setVelocity(vec);
+											if (e instanceof Player) {
+												Player pp = (Player) e;
+												pp.sendMessage(ChatColor.GOLD + "You have been repelled by "
+														+ ChatColor.YELLOW + repeller);
+												pp.setFallDistance(-100.0F);
+											}
+										}
+									}
+								}
+
+							}, 10L, 5L);
 					new BukkitRunnable() {
 
 						@Override
@@ -203,8 +257,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflamethrowing)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflamethrowing)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -227,8 +280,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoffirespreading)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoffirespreading)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -246,9 +298,8 @@ public class PlayerListener implements Listener, hashmaps {
 					smokeEffect.iterations = 20 * 20; // there is an
 
 					smokeEffect.start();
-					
+
 					new BukkitRunnable() {
-						
 
 						@Override
 						public void run() {
@@ -262,8 +313,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofincineration)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofincineration)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -434,7 +484,7 @@ public class PlayerListener implements Listener, hashmaps {
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
-							
+
 							player.setFlying(false);
 							player.setAllowFlight(false);
 							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
@@ -444,9 +494,8 @@ public class PlayerListener implements Listener, hashmaps {
 					}.runTaskLater(this.plugin, 200);
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
-				} 
-			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofinvis)) {
+				}
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofinvis)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -695,8 +744,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} 
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofpoison)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofpoison)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -804,7 +852,6 @@ public class PlayerListener implements Listener, hashmaps {
 					bleedEffect.color = Color.AQUA;
 					bleedEffect.start();
 
-
 					player.sendMessage("Prepare to be launched..");
 					new BukkitRunnable() {
 
@@ -860,8 +907,7 @@ public class PlayerListener implements Listener, hashmaps {
 						}
 					}.runTaskLater(this.plugin, 100);
 				}
-			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofblinding)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofblinding)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -974,8 +1020,7 @@ public class PlayerListener implements Listener, hashmaps {
 					}
 				}.runTaskLater(this.plugin, 400);
 
-			}  
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofextremepower)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofextremepower)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1103,14 +1148,15 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 			}
-		} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK || act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK) {
-			
+		} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK || act == Action.LEFT_CLICK_AIR
+				|| act == Action.LEFT_CLICK_BLOCK) {
+
 			Player player = event.getPlayer();
 			if (player.getInventory().getItemInHand().getType() == Material.AIR) {
-			if (fireball.containsKey(player)) {
-				player.launchProjectile(Fireball.class);
+				if (fireball.containsKey(player)) {
+					player.launchProjectile(Fireball.class);
 
-			}
+				}
 			}
 		}
 	}
@@ -1201,7 +1247,7 @@ public class PlayerListener implements Listener, hashmaps {
 			Entity shooter = arrow.getShooter();
 			if ((shooter instanceof Player)) {
 				Player player = (Player) shooter;
-				
+
 				if (explosivearrows.containsKey(player)) {
 
 					arrow.getWorld().playEffect(arrow.getLocation(), org.bukkit.Effect.LARGE_SMOKE, 0);
@@ -1214,38 +1260,60 @@ public class PlayerListener implements Listener, hashmaps {
 				} else if (molotov.containsKey(player)) {
 					final int RADIUS = 2;
 					Location center = arrow.getLocation();
-				    final List<Block> burn = new ArrayList<Block>();
-				    int posX = arrow.getLocation().getBlockX();
-			        int posY = arrow.getLocation().getBlockY();
-			        int posZ = arrow.getLocation().getBlockZ();
-			        int x = arrow.getLocation().getBlockX();
-			        int y = arrow.getLocation().getBlockY();
-			        int z = arrow.getLocation().getBlockZ();
-			        for (x = -RADIUS; x <= RADIUS; x++) {
-			            for (z = -RADIUS; z <= RADIUS; z++) {
-			                Block block = event.getEntity().getWorld().getBlockAt(posX + x, y, posZ + z);
-			                if (block.getType() != Material.AIR)
-			                    continue;
-			                block.setType(Material.FIRE);
-			                burn.add(block);
-			            
-				        }
-				    }
-				 
-				    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-				 
-				        @Override
-				        public void run() {
-				            for (Block block : burn)
-				                if (block.getType() == Material.FIRE)
-				                    block.setType(Material.AIR);
-				        }
-				 
-				    }, 60L);
+					final List<Block> burn = new ArrayList<Block>();
+					int posX = arrow.getLocation().getBlockX();
+					int posY = arrow.getLocation().getBlockY();
+					int posZ = arrow.getLocation().getBlockZ();
+					int x = arrow.getLocation().getBlockX();
+					int y = arrow.getLocation().getBlockY();
+					int z = arrow.getLocation().getBlockZ();
+					for (x = -RADIUS; x <= RADIUS; x++) {
+						for (z = -RADIUS; z <= RADIUS; z++) {
+							Block block = event.getEntity().getWorld().getBlockAt(posX + x, y, posZ + z);
+							if (block.getType() != Material.AIR)
+								continue;
+							block.setType(Material.FIRE);
+							burn.add(block);
+
+						}
+					}
+
+					Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+
+						@Override
+						public void run() {
+							for (Block block : burn)
+								if (block.getType() == Material.FIRE)
+									block.setType(Material.AIR);
+						}
+
+					}, 60L);
+				} else if (lightning.containsKey(player)) {
+					World world = arrow.getWorld();
+					world.strikeLightning(arrow.getLocation());
+				} else if (poison.containsKey(player)) {
+					EffectManager em = new EffectManager(plugin);
+					ShieldEffect bleedEffect = new ShieldEffect(em);
+					bleedEffect.setLocation(arrow.getLocation());
+					// Bleeding takes 15 seconds
+					// period * iterations = time of effect
+					bleedEffect.iterations = 4;
+					bleedEffect.particle = ParticleEffect.SPELL_MOB;
+					bleedEffect.color = Color.PURPLE;
+					bleedEffect.start();
+					List<Entity> entities = arrow.getNearbyEntities(2, 0, 2);
+					for (Entity e : entities) {
+						if (e.getType().isAlive()) {
+							if (e instanceof Player) {
+
+								((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200, 0));
+							}
+						}
+					}
+
 				}
 			}
 		}
 	}
-
 
 }

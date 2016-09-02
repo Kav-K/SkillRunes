@@ -207,6 +207,20 @@ public class testCommand implements CommandExecutor, hashmaps {
 		loreList.add(ChatColor.GRAY + "Right click to use");
 		item.setItemMeta(im);
 		inventory.addItem(item);
+		im.setDisplayName(ChatColor.YELLOW + ChatColor.BOLD.toString() + "Rune of Lightning Arrows");
+		loreList.clear();
+		loreList.add(ChatColor.GRAY + "Harness the power embedded in this mythical rune");
+		loreList.add(ChatColor.GRAY + "To strike lightning on arrow hits!");
+		loreList.add(ChatColor.GRAY + "Right click to use");
+		item.setItemMeta(im);
+		inventory.addItem(item);
+		im.setDisplayName(ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "Rune of Poisonous Arrows");
+		loreList.clear();
+		loreList.add(ChatColor.GRAY + "Harness the power embedded in this mythical rune");
+		loreList.add(ChatColor.GRAY + "To poison those near your shots");
+		loreList.add(ChatColor.GRAY + "Right click to use");
+		item.setItemMeta(im);
+		inventory.addItem(item);
 		String test = ChatColor.RED + "displayName";
 		if (item.getItemMeta().getDisplayName().equals(test)) {
 			player.sendMessage("no!");
