@@ -64,6 +64,10 @@ public class Main extends JavaPlugin implements hashmaps {
     public String runeofarrowaffinity = this.coloredString("Runes.runeofarrowaffinity.name");
     public String runeofclarity = this.coloredString("Runes.runeofclarity.name");
     public String runeofwaterwalking = this.coloredString("Runes.runeofwaterwalking.name");
+    public String disabledmessage = this.coloredString("disabledmessage");
+    public String prefix = this.coloredString("prefix");
+    public String alreadyactivemessage = this.coloredString("alreadyactivemessage");
+    public String youmayuseagainmessage = this.coloredString("youmayuseagainmessage");
 	
 	//Add auto updater and licensing feature
 	@Override
@@ -609,6 +613,26 @@ public class Main extends JavaPlugin implements hashmaps {
 		item.setItemMeta(im);
 
 		inventory.addItem(item);
+   }
+   public int getDelay(String string) {
+	   int i =this.configInt("Runes."+string+".delay");
+	   return i;
+   }
+   public int getDuration(String string) {
+	   int i = this.configInt("Runes."+string+".duration");
+	   return i;
+   }
+   public boolean isEnabled(String string) {
+	   boolean i = this.configBoolean("Runes."+string+".enabled");
+	   return i;
+   }
+   public int getAmplifier(String string) {
+	   int i = this.configInt("Runes."+string+".amplifier");
+	   return i;
+   }
+   public boolean particleson(String string) {
+	   boolean i = this.configBoolean("Runes."+string+".particles");
+	   return i;
    }
 		    
 

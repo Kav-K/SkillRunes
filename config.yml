@@ -1,3 +1,7 @@
+prefix: '&c&ltest'
+disabledmessage: 'This rune is disabled!'
+alreadyactivemessage: 'You already have an active rune!'
+youmayuseagainmessage: 'You may now use a rune again'
 Runes:
   runeofspeed:
     name: '&b&lRune of Speed'
@@ -7,6 +11,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofstrength:
     name: '&b&lRune of Strength'
     lore1: '&7Grant thyself with extreme strength'
@@ -15,6 +21,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofinvisibility:
     name: '&b&lRune of Invisibility'
     lore1: '&7Hide thyself from thy enemies'
@@ -23,6 +31,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofdestruction:
     name: '&c&lRune of Destruction'
     lore1: '&7Create an explosion at your feet'
@@ -31,6 +41,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofincineration:
     name: '&5&lRune of Incineration'
     lore1: '&7Burn enemies around you'
@@ -39,6 +51,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeoflaunching:
     name: '&c&lRune of Launching'
     lore1: '&7Launch thy body into the sky'
@@ -47,6 +61,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofsickening:
     name: '&5&lRune of Sickening'
     lore1: '&7Poison those around you'
@@ -55,6 +71,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofhealing:
     name: '&c&lRune of Healing'
     lore1: '&7Heal thyself to full health'
@@ -63,6 +81,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofprotection:
     name: '&6&lRune of Protection'
     lore1: '&7Immortality for a period of time'
@@ -71,6 +91,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofblinding:
     name: '&5&lRune of Blinding'
     lore1: '&7Blind those around you'
@@ -79,6 +101,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofarrowaffinity:
     name: '&c&lRune of Arrow Affinity'
     lore1: '&7Shoot arrows from your hand!'
@@ -88,6 +112,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofclarity:
     name: '&f&lRune of Clarity'
     lore1: '&7Clear all potion effects from thyself'
@@ -96,6 +122,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofwaterwalking:
     name: '&b&lRune of Water Walking'
     lore1: '&7Walk on water for a period of time'
@@ -104,6 +132,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeoflightning:
     name: '&5&lRune of Lightning'
     lore1: '&7Strike down lightning on nearby enemies'
@@ -112,6 +142,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofextremepower:
     name: '&c&lRune of Extreme Power'
     lore1: '&7WREAK HAVOC ON THY ENEMIES'
@@ -121,6 +153,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofwither:
     name: '&5&lRune of Wither'
     lore1: '&7Wither enemies nearby'
@@ -129,6 +163,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofvampirism:
     name: '&c&lRune of Vampirism'
     lore1: '&7Steal health from your enemies as you hit'
@@ -137,6 +173,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofbarraging:
     name: '&a&lRune of Barraging'
     lore1: '&7Multiple arrows shot from your bow'
@@ -145,6 +183,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofregeneration:
     name: '&c&lRune of Regeneration'
     lore1: '&7Regenerate your health'
@@ -153,6 +193,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofvolatilearrows:
     name: '&a&lRune of Volatile Arrows'
     lore1: '&7Arrows explode on hit!'
@@ -161,6 +203,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofthorns:
     name: '&c&lRune of Thorns'
     lore1: '&7Injure those who dare hurt you'
@@ -169,14 +213,15 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofrepair:
     name: '&c&lRune of Repair'
     lore1: '&7Repair your armor to full durability'
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
-    amplifier: 0
-    duration: 20
     enabled: true
+    delay: 20
   runeofleaping:
     name: '&b&lRune of Leaping'
     lore1: '&7Jump like a rabbit'
@@ -185,6 +230,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofflying:
     name: '&c&lRune of Flying'
     lore1: '&7Gain flight powers for a duration of time'
@@ -193,6 +240,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofflamingarrows:
     name: '&a&lRune of Flaming Arrows'
     lore1: '&7Spread patches of fire with your arrows'
@@ -201,6 +250,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofflamethrowing:
     name: '&c&lRune of FlameThrowing'
     lore1: '&7Summon fireballs with your fists!'
@@ -210,6 +261,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofrepellant:
     name: '&6&lRune of Repellant'
     lore1: '&7Repel thy enemies!'
@@ -218,6 +271,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeoflightningarrows:
     name: '&a&lRune of Lightning Arrows'
     lore1: '&7Summon lightning on arrow hit'
@@ -226,6 +281,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofpoisonarrows:
     name: '&a&lRune of Poison Arrows'
     lore1: '&7Poison nearby enemies on arrow hit'
@@ -234,6 +291,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofhaste:
     name: '&b&lRune of Haste'
     lore1: '&7Dig and Hit faster'
@@ -242,6 +301,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofcrippling:
     name: '&c&lRune of Crippling'
     lore1: '&7Weaken those you hit!'
@@ -250,14 +311,19 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofminions:
     name: '&4&lRune of Minions'
     lore1: '&7Spawn helpers where your enemies stand'
     lore2: '&7Right click to use'
     lore3: '&4AoE Rune'
-    amplifier: 0
-    duration: 20
+    miniondamage: 5
+    minionhealth: 100
+    minionname: 'Minion boi!'
+    minionlivetime: 30
     enabled: true
+    delay: 20
   runeofbreathing:
     name: '&b&lRune of Breathing'
     lore1: '&7Breathe underwater better'
@@ -266,6 +332,8 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20
   runeofparalyzing:
     name: '&4&lRune of Paralyzing'
     lore1: '&7Paralyze those around you'
@@ -274,3 +342,5 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    particles: true
+    delay: 20

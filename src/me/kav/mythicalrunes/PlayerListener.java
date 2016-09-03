@@ -34,6 +34,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import de.slikey.effectlib.EffectManager;
@@ -80,7 +81,7 @@ public class PlayerListener implements Listener, hashmaps {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
 					}
-					player.sendMessage(ChatColor.DARK_RED + "AS you use this mythical rune, it shatters into pieces.");
+					player.sendMessage(ChatColor.DARK_RED + "As you use this mythical rune, it shatters into pieces.");
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					Location location = player.getEyeLocation();
@@ -114,7 +115,7 @@ public class PlayerListener implements Listener, hashmaps {
 							nodmg.remove(player, player);
 
 						}
-					}.runTaskLater(this.plugin, 40);
+					}.runTaskLater(this.plugin, 30);
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
@@ -125,7 +126,7 @@ public class PlayerListener implements Listener, hashmaps {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
 					}
-					player.sendMessage(ChatColor.GREEN + "AS you use this mythical rune, it shatters into pieces.");
+					player.sendMessage(ChatColor.DARK_RED + "As you use this mythical rune, it shatters into pieces.");
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					alreadyused.put(player, player);
@@ -134,7 +135,7 @@ public class PlayerListener implements Listener, hashmaps {
 
 					// Bleeding takes 15 seconds
 					// period * iterations = time of effect
-					smokeEffect.iterations =2; // there is an
+					smokeEffect.iterations = 2; // there is an
 												smokeEffect.particle = ParticleEffect.SPELL_MOB;	// effect here
 					smokeEffect.color = Color.WHITE;
 					smokeEffect.start();
@@ -434,6 +435,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofspeed)) {
+				if (plugin.isEnabled("runeofspeed") == true) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -441,59 +443,96 @@ public class PlayerListener implements Listener, hashmaps {
 					alreadyused.put(player, player);
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					if (plugin.particleson("runeofspeed") == true) { 
 					WarpEffect bleedEffect = new WarpEffect(em);
 					bleedEffect.setEntity(event.getPlayer());
 					// Bleeding takes 15 seconds
 					// period * iterations = time of effect
-					bleedEffect.iterations = 20 * 20;
+					bleedEffect.iterations = 100 * 100;
+					
 					bleedEffect.particle = ParticleEffect.SPELL_MOB;
 					bleedEffect.color = Color.AQUA;
 					bleedEffect.start();
-					player.sendMessage(ChatColor.AQUA + "As you use this mythical rune, it shatters into pieces");
-					player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 0));
+					
+					BukkitTask task2 = Bukkit.getServer().getScheduler().runTaskLater(this.plugin,
+							new Runnable() {
+
+								@Override
+								public void run() {
+									bleedEffect.cancel();
+									
+											}
+										
+									
+								
+
+							}, plugin.getDuration("runeofspeed")*20L);
+					}
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, plugin.getDuration("runeofspeed")*20, plugin.getAmplifier("runeofspeed")));
+					player.sendMessage(plugin.prefix + ChatColor.AQUA + " As you use this mythical rune, it shatters into pieces");
+					
+					
 					new BukkitRunnable() {
 
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
-							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							
+							player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
 
 						}
-					}.runTaskLater(this.plugin, 400);
+					}.runTaskLater(this.plugin, plugin.getDelay("runeofspeed")*20);
 				} else {
-					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+					player.sendMessage(plugin.prefix + " " + plugin.alreadyactivemessage);
+				} 
+				} else {
+					player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 				}
 			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofstrength)) {
+				if (plugin.isEnabled("runeofstrength")) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
 					}
+					player.getInventory().getItemInHand()
+					.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					alreadyused.put(player, player);
+					if (plugin.particleson("runeofstrength")) {
 					WarpEffect bleedEffect = new WarpEffect(em);
 					bleedEffect.setEntity(event.getPlayer());
 					// Bleeding takes 15 seconds
 					// period * iterations = time of effect
-					bleedEffect.iterations = 20 * 20;
+					bleedEffect.iterations = 100 * 100;
 					bleedEffect.particle = ParticleEffect.SPELL_MOB;
 					bleedEffect.color = Color.RED;
 					bleedEffect.start();
-					player.getInventory().getItemInHand()
-							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
-					player.sendMessage(ChatColor.RED + "As you use this mythical rune, it shatters into pieces.");
-					player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 0));
+				    new BukkitRunnable() {
+				    	@Override
+				    	public void run() {
+				    		bleedEffect.cancel();
+				    	}
+				    }.runTaskLater(this.plugin, plugin.getDuration("runeofstrength") *20);
+					}
+					player.sendMessage(plugin.prefix + ChatColor.RED + " As you use this mythical rune, it shatters into pieces.");
+					player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, plugin.getDuration("runeofstrength")*20, plugin.getAmplifier("runeofstrength")));
 					new BukkitRunnable() {
 
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
-							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
 
 						}
-					}.runTaskLater(this.plugin, 400);
+					}.runTaskLater(this.plugin, plugin.getDuration("runeofstrength")*20);
 				} else {
-					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+					player.sendMessage(plugin.prefix + " " + plugin.alreadyactivemessage);
 				}
+				} else {
+					player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
+				}
+			
 			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofrepair)) {
+				if (plugin.isEnabled("runeofrepair")) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -501,38 +540,38 @@ public class PlayerListener implements Listener, hashmaps {
 					alreadyused.put(player, player);
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
-					player.sendMessage(ChatColor.AQUA + "As you use this mythical rune, it shatters into pieces.");
+					player.sendMessage(ChatColor.AQUA + " As you use this mythical rune, it shatters into pieces.");
 					try {
 						ItemStack a1 = player.getInventory().getBoots();
 						a1.setDurability((short) 0);
-						player.sendMessage(ChatColor.GREEN + "Your boots were repaired!");
+						player.sendMessage(plugin.prefix + ChatColor.GREEN + " Your boots were repaired!");
 					} catch (Exception exeption) {
-						player.sendMessage(ChatColor.RED + "You weren't wearing any boots!");
+						player.sendMessage(plugin.prefix + ChatColor.RED + " You weren't wearing any boots!");
 					}
 					try {
 						ItemStack a2 = player.getInventory().getLeggings();
 						a2.setDurability((short) 0);
-						player.sendMessage(ChatColor.GREEN + "Your leggings were repaired!");
+						player.sendMessage(plugin.prefix + ChatColor.GREEN + " Your leggings were repaired!");
 					} catch (Exception exeption) {
-						player.sendMessage(ChatColor.RED + "You weren't wearing any boots!");
+						player.sendMessage(plugin.prefix + ChatColor.RED + " You weren't wearing any boots!");
 					}
 					try {
 						ItemStack a3 = player.getInventory().getChestplate();
 						a3.setDurability((short) 0);
-						player.sendMessage(ChatColor.GREEN + "Your chestplate was repaired!");
+						player.sendMessage(plugin.prefix + ChatColor.GREEN + " Your chestplate was repaired!");
 					} catch (Exception exception) {
-						player.sendMessage(ChatColor.RED + "You weren't wearing any boots!");
+						player.sendMessage(plugin.prefix + ChatColor.RED + " You weren't wearing any boots!");
 					}
 					try {
 						ItemStack a4 = player.getInventory().getHelmet();
 						a4.setDurability((short) 0);
-						player.sendMessage(ChatColor.GREEN + "Your helmet was repaired!");
+						player.sendMessage(plugin.prefix + ChatColor.GREEN + " Your helmet was repaired!");
 					} catch (Exception exception) {
-						player.sendMessage(ChatColor.RED + "You weren't wearing any boots!");
+						player.sendMessage(plugin.prefix + ChatColor.RED + " You weren't wearing any boots!");
 					}
 
 					player.updateInventory();
-					player.sendMessage(ChatColor.GREEN + "You armor has been repaired to full durability!");
+					player.sendMessage(plugin.prefix + ChatColor.GREEN + " Your armor has been repaired to full durability!");
 
 					// repair
 
@@ -541,29 +580,36 @@ public class PlayerListener implements Listener, hashmaps {
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
-							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
 
 						}
-					}.runTaskLater(this.plugin, 40);
+					}.runTaskLater(this.plugin, plugin.getDelay("runeofrepair"));
 				} else {
-					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+					player.sendMessage(plugin.prefix + " " + plugin.alreadyactivemessage);
+				}
+				} else {
+					player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 				}
 			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofminions)) {
+				if (plugin.isEnabled("runeofminions")) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
 					}
 					alreadyused.put(player, player);
-					player.sendMessage(ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "As you use this mythical rune, it shatters into pieces.");
+					player.sendMessage(plugin.prefix + ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + " As you use this mythical rune, it shatters into pieces.");
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					for (Entity e : player.getNearbyEntities(5, 256, 5)) {
 						if (e instanceof Player) {
-							WarpEffect smokeEffect = new WarpEffect(em);
+							
 							Player found = (Player) e;
 							Creature z = (Creature) e.getWorld().spawnEntity(e.getLocation(), EntityType.IRON_GOLEM);
 							z.setTarget((LivingEntity) e);
-							z.damage(5);
+							z.damage(plugin.configInt("Runes.runeofminions.miniondamage"));
+							z.setHealth(plugin.configInt("Runes.runeofminions.minionhealth"));
+							z.setCustomName(plugin.coloredString("Runes.runeofmonions.minionname"));
+							z.setCustomNameVisible(true);
 							Integer task2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin,
 									new Runnable() {
 
@@ -581,16 +627,22 @@ public class PlayerListener implements Listener, hashmaps {
 									z.remove();
 									Bukkit.getServer().getScheduler().cancelTask(task2);
 								}
-							}.runTaskLater(this.plugin, 600);
+							}.runTaskLater(this.plugin, plugin.configInt("Runes.runeofminions.minionlivetime")*20);
 							new BukkitRunnable() {
 								public void run() {
 									alreadyused.remove(player, player);
+									player.sendMessage(plugin.prefix + " " +plugin.youmayuseagainmessage);
 								}
-							}.runTaskLater(this.plugin, 600);
+							}.runTaskLater(this.plugin, plugin.getDelay("runeofminions"));
 						}
 					}
 					
+				} else {
+					player.sendMessage(plugin.prefix + " " +plugin.alreadyactivemessage);
 				}
+			} else {
+				player.sendMessage(plugin.prefix + " " +plugin.disabledmessage);
+			}
 			}
 			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofflying)) {
 				if (!(alreadyused.containsKey(player))) {
