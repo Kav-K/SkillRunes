@@ -17,7 +17,7 @@ public class Main extends JavaPlugin implements hashmaps {
 	public void onEnable() {
     loadConfiguration();
     this.reloadConfig();
-	this.getCommand("mm").setExecutor(new testCommand(this));
+	this.getCommand("sr").setExecutor(new testCommand(this));
 	new PlayerListener(this);
  	}
 	
