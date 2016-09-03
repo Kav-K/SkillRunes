@@ -38,7 +38,6 @@ public class testCommand implements CommandExecutor, hashmaps {
 			give.runeOfFlying(target);
 			give.runeOfHaste(target);
 			give.runeOfHealing(target);
-			give.runeOfHealing(target);
 			give.runeOfIncineration(target);
 			give.runeOfInvisibility(target);
 			give.runeOfLaunching(target);
@@ -52,12 +51,14 @@ public class testCommand implements CommandExecutor, hashmaps {
 			give.runeOfRepair(target);
 			give.runeOfRepellant(target);
              give.runeOfSickening(target);
-             give.runeOfSpeed(target);
              give.runeOfStrength(target);
              give.runeOfThorns(target);
              give.runeOfVampirism(target);
              give.runeOfVolatileArrows(target);
              give.runeOfWither(target);
+             give.runeOfArrowAffinity(target);
+             give.runeOfClarity(player);
+             give.runeOfWaterWalking(player);
 		} else if (target == null) {
 			player.sendMessage(ChatColor.RED + "That is not a valid target!");
 		}

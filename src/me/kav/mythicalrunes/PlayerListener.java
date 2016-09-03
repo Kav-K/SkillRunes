@@ -1,6 +1,7 @@
 package me.kav.mythicalrunes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,10 +27,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -44,6 +47,7 @@ import de.slikey.effectlib.effect.WaveEffect;
 import de.slikey.effectlib.util.ParticleEffect;
 
 import org.bukkit.Color;
+import org.bukkit.Effect;
 
 public class PlayerListener implements Listener, hashmaps {
 
@@ -91,6 +95,9 @@ public class PlayerListener implements Listener, hashmaps {
     String runeofcrippling = ChatColor.DARK_GRAY + ChatColor.BOLD.toString() + "Rune of Crippling";
     String runeofminions = ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "Rune of Minions";
     String runeofparalyze = ChatColor.DARK_BLUE + ChatColor.BOLD.toString() + "Rune of Paralyzing";
+    String runeofarrowaffinity = ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Arrow Affinity";
+    String runeofclarity = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Clarity";
+    String runeofwaterwalking = ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Water Walking";
 	
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -146,7 +153,54 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofparalyze)) {
+			}else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofclarity)) {
+				if (!(alreadyused.containsKey(player))) {
+
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(ChatColor.GREEN + "AS you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					WaveEffect smokeEffect = new WaveEffect(em);
+					smokeEffect.setEntity(player);
+
+					// Bleeding takes 15 seconds
+					// period * iterations = time of effect
+					smokeEffect.iterations =2; // there is an
+												smokeEffect.particle = ParticleEffect.SPELL_MOB;	// effect here
+					smokeEffect.color = Color.WHITE;
+					smokeEffect.start();
+					player.removePotionEffect(PotionEffectType.SLOW);
+					player.removePotionEffect(PotionEffectType.HARM);
+					player.removePotionEffect(PotionEffectType.WEAKNESS);
+					player.removePotionEffect(PotionEffectType.WITHER);
+					player.removePotionEffect(PotionEffectType.POISON);
+					player.removePotionEffect(PotionEffectType.BLINDNESS);
+					player.removePotionEffect(PotionEffectType.CONFUSION);
+					player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+					player.removePotionEffect(PotionEffectType.HUNGER);
+					player.sendMessage(ChatColor.GREEN + "You have been cleansed!");
+					
+					
+					
+
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+
+							alreadyused.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+
+						}
+					}.runTaskLater(this.plugin, 100);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			}  
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofparalyze)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -908,14 +962,15 @@ public class PlayerListener implements Listener, hashmaps {
 					bleedEffect.iterations = 3 * 20;
 					bleedEffect.color = Color.AQUA;
 					bleedEffect.start();
-					nodmg1.put(player, player);
+
 					player.sendMessage("Prepare to be launched..");
 					new BukkitRunnable() {
 
 						@Override
 						public void run() {
-							nodmg1.put(player, player);
+
 							player.setVelocity(new Vector(0, 10, 0));
+							player.setFallDistance(-100.0f);
 
 						}
 					}.runTaskLater(this.plugin, 60);
@@ -927,7 +982,7 @@ public class PlayerListener implements Listener, hashmaps {
 							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
 
 						}
-					}.runTaskLater(this.plugin, 100);
+					}.runTaskLater(this.plugin, 200);
 					new BukkitRunnable() {
 
 						@Override
@@ -1095,7 +1150,51 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofbaraging)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofwaterwalking)) {
+				if (!(alreadyused.containsKey(player))) {
+
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					player.sendMessage(ChatColor.AQUA + "As you use this mythical rune, it shatters into pieces.");
+					alreadyused.put(player, player);
+					waterwalking.put(player, player);
+					new BukkitRunnable() {
+						public void run() {
+							alreadyused.remove(player, player);
+							waterwalking.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+						}
+					}.runTaskLater(this.plugin, 600);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			} 
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofarrowaffinity)) {
+				if (!(alreadyused.containsKey(player))) {
+
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					player.sendMessage(ChatColor.YELLOW + "As you use this mythical rune, it shatters into pieces.");
+					alreadyused.put(player, player);
+					arrows.put(player, player);
+					new BukkitRunnable() {
+						public void run() {
+							alreadyused.remove(player, player);
+							arrows.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+						}
+					}.runTaskLater(this.plugin, 300);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			}
+			 else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofbaraging)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1281,6 +1380,10 @@ public class PlayerListener implements Listener, hashmaps {
 					player.launchProjectile(Fireball.class);
 
 				}
+			} if (player.getInventory().getItemInHand().getType() == Material.AIR) {
+				if (arrows.containsKey(player)) {
+					player.launchProjectile(Arrow.class);
+				}
 			}
 		}
 	}
@@ -1302,6 +1405,27 @@ public class PlayerListener implements Listener, hashmaps {
 
 			}
 		}
+	}
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onMove(PlayerMoveEvent e) {
+	 HashMap<Player, Block> blocks = new HashMap<Player, Block>();
+	 if (waterwalking.containsKey(e.getPlayer())) {
+		 Location block = e.getPlayer().getLocation().add(0, -1, 0);
+		 if (block.getBlock().getType() == Material.WATER || block.getBlock().getType() == Material.STATIONARY_WATER) {
+			 blocks.put(e.getPlayer(), block.getBlock());
+			 block.getBlock().setType(Material.GLASS);
+			 new BukkitRunnable() {
+				 public void run() {
+					 block.getBlock().setType(Material.WATER);
+				 }
+			 }.runTaskLater(this.plugin, 60);
+		 }
+	 }
+	 
+
+
+		
+		
 	}
 
 	@EventHandler

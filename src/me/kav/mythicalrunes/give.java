@@ -173,6 +173,51 @@ public class give extends JavaPlugin {
 
 		inventory.addItem(item);
    }
+   public static void runeOfArrowAffinity(Player player) {
+	   Inventory inventory = player.getInventory();
+		ItemStack item = new ItemStack(Material.NETHER_STAR);
+		ItemMeta im = item.getItemMeta();
+		List<String> loreList = new ArrayList<String>();
+		im.setDisplayName(ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Arrow Affinity");
+		loreList.clear();
+		loreList.add(ChatColor.GRAY + "Harness the power embedded in this mythical rune");
+		loreList.add(ChatColor.GRAY + "To shoot arrows from your hand");
+		loreList.add(ChatColor.GRAY + "Right click to use");
+		im.setLore(loreList);
+		item.setItemMeta(im);
+
+		inventory.addItem(item);
+   }
+   public static void runeOfClarity(Player player) {
+	   Inventory inventory = player.getInventory();
+		ItemStack item = new ItemStack(Material.NETHER_STAR);
+		ItemMeta im = item.getItemMeta();
+		List<String> loreList = new ArrayList<String>();
+		im.setDisplayName(ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Clarity");
+		loreList.clear();
+		loreList.add(ChatColor.GRAY + "Harness the power embedded in this mythical rune");
+		loreList.add(ChatColor.GRAY + "To clear all negative potion effects");
+		loreList.add(ChatColor.GRAY + "Right click to use");
+		im.setLore(loreList);
+		item.setItemMeta(im);
+
+		inventory.addItem(item);
+   }
+   public static void runeOfWaterWalking(Player player) {
+	   Inventory inventory = player.getInventory();
+		ItemStack item = new ItemStack(Material.NETHER_STAR);
+		ItemMeta im = item.getItemMeta();
+		List<String> loreList = new ArrayList<String>();
+		im.setDisplayName(ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Water Walking");
+		loreList.clear();
+		loreList.add(ChatColor.GRAY + "Harness the power embedded in this mythical rune");
+		loreList.add(ChatColor.GRAY + "To walk on water");
+		loreList.add(ChatColor.GRAY + "Right click to use");
+		im.setLore(loreList);
+		item.setItemMeta(im);
+
+		inventory.addItem(item);
+   }
    public static void runeOfLightning(Player player) {
 	   Inventory inventory = player.getInventory();
 		ItemStack item = new ItemStack(Material.NETHER_STAR);
