@@ -50,54 +50,19 @@ import org.bukkit.Color;
 import org.bukkit.Effect;
 
 public class PlayerListener implements Listener, hashmaps {
-
 	Main plugin;
 
-	public PlayerListener(Main instance) {
-		plugin = instance;
-
+	public PlayerListener(Main passedPlugin) {
+		this.plugin = passedPlugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-
 	}
+
+
+
+	
 
 	// INITIALIZE THE VARIABLES FOR THE BLOCKS HERE \\
 
-	String runeofspeed = ChatColor.BLUE + ChatColor.BOLD.toString() + "Rune of Speed";
-	String runeofstrength = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Strength";
-	String runeofinvis = ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Invisibility";
-	String runeofdestruction = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Destruction";
-	String runeofpoison = ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "Rune of Sickening";
-	String runeofillumination = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Rune of Launching";
-	String runeofincineration = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Incineration";
-	String runeofhealing = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Healing";
-	String runeofprotection = ChatColor.GOLD + ChatColor.BOLD.toString() + "Rune of Protection";
-	String runeofbreathing = ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Breathing";
-	String runeofvision = ChatColor.BLUE + ChatColor.BOLD.toString() + "Rune of Vision";
-	String runeofblinding = ChatColor.BLACK + ChatColor.BOLD.toString() + "Rune of Blinding";
-	String runeoflightning = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Rune of Lightning";
-	String runeofextremepower = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Extreme Power";
-	String runeofwither = ChatColor.DARK_GRAY + ChatColor.BOLD.toString() + "Rune of Wither";
-	String runeofvampirism = ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "Rune of Vampirisim";
-	String runeofbaraging = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Barraging";
-	String runeofregeneration = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Regeneration";
-	String runeofvolatilearrows = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Volatile Arrows";
-	String runeofthorns = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Thorns";
-	String runeofrepair = ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + "Rune of Repair";
-	String runeofleaping = ChatColor.BLUE + ChatColor.BOLD.toString() + "Rune of Leaping";
-	String linuxcowboyrune = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Linux's Cowboy Rune Of Gay";
-	String runeofflying = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Flying";
-	String runeoffirespreading = ChatColor.RED + ChatColor.BOLD.toString() + "Rune of Fire Spreading";
-	String runeofflamethrowing = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Rune of Flame Throwing";
-	String runeofrepellant = ChatColor.GOLD + ChatColor.BOLD.toString() + "Rune of Repellant";
-	String runeoflightningarrows = ChatColor.YELLOW + ChatColor.BOLD.toString() + "Rune of Lightning Arrows";
-	String runeofpoisonousarrows = ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "Rune of Poisonous Arrows";
-	String runeofhaste = ChatColor.GRAY + ChatColor.BOLD.toString() + "Rune of Haste";
-    String runeofcrippling = ChatColor.DARK_GRAY + ChatColor.BOLD.toString() + "Rune of Crippling";
-    String runeofminions = ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "Rune of Minions";
-    String runeofparalyze = ChatColor.DARK_BLUE + ChatColor.BOLD.toString() + "Rune of Paralyzing";
-    String runeofarrowaffinity = ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Arrow Affinity";
-    String runeofclarity = ChatColor.GREEN + ChatColor.BOLD.toString() + "Rune of Clarity";
-    String runeofwaterwalking = ChatColor.AQUA + ChatColor.BOLD.toString() + "Rune of Water Walking";
 	
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -105,10 +70,11 @@ public class PlayerListener implements Listener, hashmaps {
 		Action act = event.getAction();
 		if (act == Action.RIGHT_CLICK_AIR) {
 
+
 			EffectManager em = new EffectManager(plugin);
 			Player player = event.getPlayer();
 			PlayerInventory inventory = player.getInventory();
-			if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofdestruction)) {
+			if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofdestruction)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -153,7 +119,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 
-			}else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofclarity)) {
+			}else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofclarity)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -200,7 +166,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 			}  
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofparalyze)) {
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofparalyze)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -247,7 +213,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 			} 
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoflightningarrows)) {
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeoflightningarrows)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -272,7 +238,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofpoisonousarrows)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofpoisonousarrows)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -296,7 +262,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofcrippling)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofcrippling)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -316,7 +282,7 @@ public class PlayerListener implements Listener, hashmaps {
 					}
 				}.runTaskLater(this.plugin, 300);
 			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofrepellant)) {
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofrepellant)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -371,7 +337,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflamethrowing)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofflamethrowing)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -394,7 +360,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoffirespreading)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeoffirespreading)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -427,7 +393,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofincineration)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofincineration)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -467,7 +433,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofspeed)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofspeed)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -497,7 +463,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofstrength)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofstrength)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -527,7 +493,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofrepair)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofrepair)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -582,7 +548,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofminions)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofminions)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -626,7 +592,7 @@ public class PlayerListener implements Listener, hashmaps {
 					
 				}
 			}
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofflying)) {
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofflying)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -653,7 +619,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofinvis)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofinvis)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -675,7 +641,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofvampirism)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofvampirism)) {
 				if (!(alreadyused.containsKey(player))) {
 					alreadyused.put(player, player);
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -705,7 +671,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofleaping)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofleaping)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -735,7 +701,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofhealing)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofhealing)) {
 				if (!(alreadyused.containsKey(player))) {
 					alreadyused.put(player, player);
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -767,7 +733,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofthorns)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofthorns)) {
 				if (!(alreadyused.containsKey(player))) {
 					alreadyused.put(player, player);
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -800,39 +766,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofvision)) {
-				if (!(alreadyused.containsKey(player))) {
-					if (player.getInventory().getItemInHand().getAmount() == 1) {
-						inventory.removeItem(player.getInventory().getItemInHand());
-					}
-					alreadyused.put(player, player);
-					player.getInventory().getItemInHand()
-							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
-					player.sendMessage(ChatColor.DARK_AQUA + "As you use this mythical rune, it shatters into pieces.");
-					player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 400, 0));
-					WarpEffect smokeEffect = new WarpEffect(em);
-					smokeEffect.setEntity(player);
-
-					// Bleeding takes 15 seconds
-					// period * iterations = time of effect
-					smokeEffect.iterations = 10 * 20;
-					smokeEffect.particle = ParticleEffect.SPELL_MOB;
-					smokeEffect.color = Color.BLUE;
-					smokeEffect.start();
-					new BukkitRunnable() {
-
-						@Override
-						public void run() {
-							alreadyused.remove(player, player);
-							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
-
-						}
-					}.runTaskLater(this.plugin, 400);
-				} else {
-					player.sendMessage(ChatColor.RED + "You already have a rune active!");
-				}
-
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofbreathing)) {
+			}  else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofbreathing)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -863,7 +797,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofprotection)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofprotection)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -903,7 +837,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofpoison)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofpoison)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -945,7 +879,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofillumination)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofillumination)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -994,80 +928,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(linuxcowboyrune)) {
-				if (!(alreadyused.containsKey(player))) {
-					if (player.getInventory().getItemInHand().getAmount() == 1) {
-						inventory.removeItem(player.getInventory().getItemInHand());
-					}
-					alreadyused.put(player, player);
-					player.getInventory().getItemInHand()
-							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
-					player.sendMessage(ChatColor.YELLOW + "As you use this mythical rune, it shatters into pieces.");
-					Location location = player.getLocation();
-					AtomEffect bleedEffect = new AtomEffect(em);
-					bleedEffect.setEntity(event.getPlayer());
-					// Bleeding takes 15 seconds
-					// period * iterations = time of effect
-					bleedEffect.iterations = 10 * 20;
-					bleedEffect.color = Color.AQUA;
-					bleedEffect.start();
-
-					player.sendMessage("Prepare to be launched..");
-					new BukkitRunnable() {
-
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(0, 10, 0));
-
-						}
-					}.runTaskLater(this.plugin, 60);
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(10, 0, 0));
-						}
-					}.runTaskLater(this.plugin, 100);
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(0, 10, 0));
-						}
-					}.runTaskLater(this.plugin, 130);
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(0, 0, 10));
-						}
-					}.runTaskLater(this.plugin, 150);
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(0, 10, 0));
-						}
-					}.runTaskLater(this.plugin, 180);
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(10, 0, 0));
-						}
-					}.runTaskLater(this.plugin, 200);
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.setVelocity(new Vector(0, 10, 0));
-						}
-					}.runTaskLater(this.plugin, 230);
-					new BukkitRunnable() {
-
-						@Override
-						public void run() {
-							alreadyused.remove(player, player);
-							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
-
-						}
-					}.runTaskLater(this.plugin, 100);
-				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofblinding)) {
+			}  else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofblinding)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1108,7 +969,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoflightning)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeoflightning)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -1150,7 +1011,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofwaterwalking)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofwaterwalking)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -1172,7 +1033,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 			} 
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofarrowaffinity)) {
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofarrowaffinity)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -1194,7 +1055,7 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 			}
-			 else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofbaraging)) {
+			 else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofbaraging)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1224,7 +1085,7 @@ public class PlayerListener implements Listener, hashmaps {
 					}
 				}.runTaskLater(this.plugin, 400);
 
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofextremepower)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofextremepower)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1255,7 +1116,7 @@ public class PlayerListener implements Listener, hashmaps {
 				} else {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofregeneration)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofregeneration)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1284,7 +1145,7 @@ public class PlayerListener implements Listener, hashmaps {
 					}.runTaskLater(this.plugin, 200);
 
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofvolatilearrows)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofvolatilearrows)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1307,7 +1168,7 @@ public class PlayerListener implements Listener, hashmaps {
 					}.runTaskLater(this.plugin, 200);
 
 				}
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofhaste)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofhaste)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1328,7 +1189,7 @@ public class PlayerListener implements Listener, hashmaps {
 				}
 			}
 
-			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofwither)) {
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofwither)) {
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());

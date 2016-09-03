@@ -24,47 +24,48 @@ public class testCommand implements CommandExecutor, hashmaps {
 
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 	Player player = (Player)sender;
-	if (alias.equals("sr") && args.length == 3 && args[0].equals("give") && args[1].equals("all")) {
+	if (alias.equals("runes") && args.length == 3 && args[0].equals("give") && args[1].equals("all")) {
 		Player target = Bukkit.getPlayerExact(args[2]);
 		if (!(target == null)) {
-			give.runeOfSpeed(target);
-			give.runeOfBarraging(target);
-			give.runeOfBlinding(target);
-			give.runeOfCrippling(target);
-			give.runeOfDestruction(target);
-			give.runeOfExtremePower(target);
-			give.runeOfFireSpreading(target);
-			give.runeOfFlameThrowing(target);
-			give.runeOfFlying(target);
-			give.runeOfHaste(target);
-			give.runeOfHealing(target);
-			give.runeOfIncineration(target);
-			give.runeOfInvisibility(target);
-			give.runeOfLaunching(target);
-			give.runeOfLeaping(target);
-			give.runeOfLightningArrows(target);
-			give.runeOfMinions(target);
-			give.runeOfParalyzing(target);
-			give.runeOfPoisonousArrows(target);
-			give.runeOfProtection(target);
-			give.runeOfRegeneration(target);
-			give.runeOfRepair(target);
-			give.runeOfRepellant(target);
-             give.runeOfSickening(target);
-             give.runeOfStrength(target);
-             give.runeOfThorns(target);
-             give.runeOfVampirism(target);
-             give.runeOfVolatileArrows(target);
-             give.runeOfWither(target);
-             give.runeOfArrowAffinity(target);
-             give.runeOfClarity(player);
-             give.runeOfWaterWalking(player);
+			plugin.runeOfSpeed(player);
+			plugin.runeOfBarraging(player);
+			plugin.runeOfBlinding(player);
+			plugin.runeOfCrippling(player);
+			plugin.runeOfDestruction(player);
+			plugin.runeOfExtremePower(player);
+			plugin.runeOfFlamingArrows(player);
+			plugin.runeOfFlameThrowing(player);
+			plugin.runeOfFlying(player);
+			plugin.runeOfHaste(player);
+			plugin.runeOfHealing(player);
+			plugin.runeOfIncineration(player);
+			plugin.runeOfInvisibility(player);
+			plugin.runeOfLaunching(player);
+			plugin.runeOfLeaping(player);
+			plugin.runeOfLightningArrows(player);
+			plugin.runeOfMinions(player);
+			plugin.runeOfParalyzing(player);
+			plugin.runeOfPoisonousArrows(player);
+			plugin.runeOfProtection(player);
+			plugin.runeOfRegeneration(player);
+			plugin.runeOfRepair(player);
+			plugin.runeOfRepellant(player);
+             plugin.runeOfSickening(player);
+             plugin.runeOfStrength(player);
+             plugin.runeOfThorns(player);
+             plugin.runeOfVampirism(player);
+             plugin.runeOfVolatileArrows(player);
+             plugin.runeOfWither(player);
+             plugin.runeOfArrowAffinity(player);
+             plugin.runeOfClarity(player);
+             plugin.runeOfWaterWalking(player);
+             plugin.runeOfBreathing(player);
 		} else if (target == null) {
 			player.sendMessage(ChatColor.RED + "That is not a valid target!");
 		}
 	
 		
-		} else if (alias.equals("sr") && args.length == 1 && args[0].equals("clearall")) {
+		} else if (alias.equals("runes") && args.length == 1 && args[0].equals("clearall")) {
 			player.sendMessage(nodmg.toString());
 			nodmg.clear();
 			player.sendMessage(nodmg.toString());
@@ -80,6 +81,7 @@ public class testCommand implements CommandExecutor, hashmaps {
 			player.sendMessage(alreadyused.toString());
 			alreadyused.clear();
 			player.sendMessage(alreadyused.toString());
+			player.sendMessage(plugin.runeofbaraging.toString());
 		}
 		
 	     

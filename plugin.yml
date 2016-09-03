@@ -1,8 +1,8 @@
-name: MythicalRunes
+name: SkillRunes
 version: 2.0
 main:  me.kav.mythicalrunes.Main
 commands:
-   sr:
+   runes:
       description: Runes root command
       usage: /<command>
    hellohello:

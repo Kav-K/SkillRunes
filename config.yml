@@ -1,1 +1,276 @@
-###################### TODO ###############################
+Runes:
+  runeofspeed:
+    name: '&b&lRune of Speed'
+    lore1: '&7Grant thyself with extreme agility'
+    lore2: '&7Right click to use'
+    lore3: '&bPotion Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofstrength:
+    name: '&b&lRune of Strength'
+    lore1: '&7Grant thyself with extreme strength'
+    lore2: '&7Right click to use'
+    lore3: '&bPotion Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofinvisibility:
+    name: '&b&lRune of Invisibility'
+    lore1: '&7Hide thyself from thy enemies'
+    lore2: '&7Right click to use'
+    lore3: '&bPotion Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofdestruction:
+    name: '&c&lRune of Destruction'
+    lore1: '&7Create an explosion at your feet'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofincineration:
+    name: '&5&lRune of Incineration'
+    lore1: '&7Burn enemies around you'
+    lore2: '&7Right click to use'
+    lore3: '&5AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeoflaunching:
+    name: '&c&lRune of Launching'
+    lore1: '&7Launch thy body into the sky'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofsickening:
+    name: '&5&lRune of Sickening'
+    lore1: '&7Poison those around you'
+    lore2: '&7Right click to use'
+    lore3: '&5AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofhealing:
+    name: '&c&lRune of Healing'
+    lore1: '&7Heal thyself to full health'
+    lore2: '&7Right click to use'
+    lore3: '&cHealing Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofprotection:
+    name: '&6&lRune of Protection'
+    lore1: '&7Immortality for a period of time'
+    lore2: '&7Right click to use'
+    lore3: '&6Protection Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofblinding:
+    name: '&5&lRune of Blinding'
+    lore1: '&7Blind those around you'
+    lore2: '&7Right click to use'
+    lore3: '&5AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofarrowaffinity:
+    name: '&c&lRune of Arrow Affinity'
+    lore1: '&7Shoot arrows from your hand!'
+    lore2: '&7Right click to use'
+    lore3: '&7To shoot, left click with nothing in hand'
+    lore4: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofclarity:
+    name: '&f&lRune of Clarity'
+    lore1: '&7Clear all potion effects from thyself'
+    lore2: '&7Right click to use'
+    lore3: '&fSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofwaterwalking:
+    name: '&b&lRune of Water Walking'
+    lore1: '&7Walk on water for a period of time'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeoflightning:
+    name: '&5&lRune of Lightning'
+    lore1: '&7Strike down lightning on nearby enemies'
+    lore2: '&7Right click to use'
+    lore3: '&5AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofextremepower:
+    name: '&c&lRune of Extreme Power'
+    lore1: '&7WREAK HAVOC ON THY ENEMIES'
+    lore2: '&7Right click to use'
+    lore3: '&cWarning.. With great power comes great recoil'
+    lore4: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofwither:
+    name: '&5&lRune of Wither'
+    lore1: '&7Wither enemies nearby'
+    lore2: '&7Right click to use'
+    lore3: '&5AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofvampirism:
+    name: '&c&lRune of Vampirism'
+    lore1: '&7Steal health from your enemies as you hit'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofbarraging:
+    name: '&a&lRune of Barraging'
+    lore1: '&7Multiple arrows shot from your bow'
+    lore2: '&7Right click to use'
+    lore3: '&aBow Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofregeneration:
+    name: '&c&lRune of Regeneration'
+    lore1: '&7Regenerate your health'
+    lore2: '&7Right click to use'
+    lore3: '&cHealing Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofvolatilearrows:
+    name: '&a&lRune of Volatile Arrows'
+    lore1: '&7Arrows explode on hit!'
+    lore2: '&7Right click to use'
+    lore3: '&aBow Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofthorns:
+    name: '&c&lRune of Thorns'
+    lore1: '&7Injure those who dare hurt you'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofrepair:
+    name: '&c&lRune of Repair'
+    lore1: '&7Repair your armor to full durability'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofleaping:
+    name: '&b&lRune of Leaping'
+    lore1: '&7Jump like a rabbit'
+    lore2: '&7Right click to use'
+    lore3: '&bPotion Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofflying:
+    name: '&c&lRune of Flying'
+    lore1: '&7Gain flight powers for a duration of time'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofflamingarrows:
+    name: '&a&lRune of Flaming Arrows'
+    lore1: '&7Spread patches of fire with your arrows'
+    lore2: '&7Right click to use'
+    lore3: '&aBow Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofflamethrowing:
+    name: '&c&lRune of FlameThrowing'
+    lore1: '&7Summon fireballs with your fists!'
+    lore2: '&7Right click to use'
+    lore3: '&7To shoot, left click with nothing in hand'
+    lore4: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofrepellant:
+    name: '&6&lRune of Repellant'
+    lore1: '&7Repel thy enemies!'
+    lore2: '&7Right click to use'
+    lore3: '&6Protection Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeoflightningarrows:
+    name: '&a&lRune of Lightning Arrows'
+    lore1: '&7Summon lightning on arrow hit'
+    lore2: '&7Right click to use'
+    lore3: '&aBow Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofpoisonarrows:
+    name: '&a&lRune of Poison Arrows'
+    lore1: '&7Poison nearby enemies on arrow hit'
+    lore2: '&7Right click to use'
+    lore3: '&4AoE&8/&aBow &4R&au&4n&ae'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofhaste:
+    name: '&b&lRune of Haste'
+    lore1: '&7Dig and Hit faster'
+    lore2: '&7Right click to use'
+    lore3: '&bPotion Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofcrippling:
+    name: '&c&lRune of Crippling'
+    lore1: '&7Weaken those you hit!'
+    lore2: '&7Right click to use'
+    lore3: '&cSpecial Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofminions:
+    name: '&4&lRune of Minions'
+    lore1: '&7Spawn helpers where your enemies stand'
+    lore2: '&7Right click to use'
+    lore3: '&4AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofbreathing:
+    name: '&b&lRune of Breathing'
+    lore1: '&7Breathe underwater better'
+    lore2: '&7Right click to use'
+    lore3: '&bPotion Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
+  runeofparalyzing:
+    name: '&4&lRune of Paralyzing'
+    lore1: '&7Paralyze those around you'
+    lore2: '&7Right click to use'
+    lore3: '&4AoE Rune'
+    amplifier: 0
+    duration: 20
+    enabled: true
