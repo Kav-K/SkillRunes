@@ -90,6 +90,7 @@ public class PlayerListener implements Listener, hashmaps {
 	String runeofhaste = ChatColor.GRAY + ChatColor.BOLD.toString() + "Rune of Haste";
     String runeofcrippling = ChatColor.DARK_GRAY + ChatColor.BOLD.toString() + "Rune of Crippling";
     String runeofminions = ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "Rune of Minions";
+    String runeofparalyze = ChatColor.DARK_BLUE + ChatColor.BOLD.toString() + "Rune of Paralyzing";
 	
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -145,7 +146,54 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.RED + "You already have a rune active!");
 				}
 
-			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoflightningarrows)) {
+			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeofparalyze)) {
+				if (!(alreadyused.containsKey(player))) {
+
+					if (player.getInventory().getItemInHand().getAmount() == 1) {
+						inventory.removeItem(player.getInventory().getItemInHand());
+					}
+					player.sendMessage(ChatColor.YELLOW + "AS you use this mythical rune, it shatters into pieces.");
+					player.getInventory().getItemInHand()
+							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+					alreadyused.put(player, player);
+					for (Entity e : player.getNearbyEntities(4, 256, 4)) {
+						if (e instanceof Player) {
+							WarpEffect smokeEffect = new WarpEffect(em);
+							Player found = (Player) e;
+							smokeEffect.setEntity(found);
+
+							// Bleeding takes 15 seconds
+							// period * iterations = time of effect
+							smokeEffect.iterations = 20 * 20; // there is an
+																// effect here
+							smokeEffect.color = Color.AQUA;
+							smokeEffect.start();
+							 
+							found.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 5));
+							found.sendMessage(ChatColor.AQUA + "You have been Paralyzed by " + ChatColor.DARK_BLUE
+									+ player.getName());
+							player.sendMessage(
+									
+									ChatColor.DARK_BLUE + "You have Paralyzed " + ChatColor.AQUA + found.getName());
+						}
+						
+					}
+
+					new BukkitRunnable() {
+
+						@Override
+						public void run() {
+
+							alreadyused.remove(player, player);
+							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+
+						}
+					}.runTaskLater(this.plugin, 100);
+				} else {
+					player.sendMessage(ChatColor.RED + "You already have a rune active!");
+				}
+			} 
+			else if (player.getItemInHand().getItemMeta().getDisplayName().equals(runeoflightningarrows)) {
 				if (!(alreadyused.containsKey(player))) {
 
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
@@ -489,15 +537,29 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "As you use this mythical rune, it shatters into pieces.");
 					player.getInventory().getItemInHand()
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
-					for (Entity e : player.getNearbyEntities(3, 256, 3)) {
+					for (Entity e : player.getNearbyEntities(5, 256, 5)) {
 						if (e instanceof Player) {
 							WarpEffect smokeEffect = new WarpEffect(em);
 							Player found = (Player) e;
 							Creature z = (Creature) e.getWorld().spawnEntity(e.getLocation(), EntityType.IRON_GOLEM);
 							z.setTarget((LivingEntity) e);
+							z.damage(5);
+							Integer task2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin,
+									new Runnable() {
+
+										@Override
+										public void run() {
+											z.setTarget((LivingEntity) e);
+													}
+												
+											
+										
+
+									}, 10L, 5L);
 							new BukkitRunnable() {
 								public void run() {
 									z.remove();
+									Bukkit.getServer().getScheduler().cancelTask(task2);
 								}
 							}.runTaskLater(this.plugin, 600);
 							new BukkitRunnable() {
@@ -638,6 +700,7 @@ public class PlayerListener implements Listener, hashmaps {
 					smokeEffect.start();
 					player.setHealth(20);
 					player.sendMessage(ChatColor.RED + "As you use this mythical rune, it shatters into pieces.");
+					
 					new BukkitRunnable() {
 
 						@Override
