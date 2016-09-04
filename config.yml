@@ -77,8 +77,7 @@ Runes:
     lore1: '&7Heal thyself to full health'
     lore2: '&7Right click to use'
     lore3: '&cHealing Rune'
-    amplifier: 0
-    duration: 20
+    healhearts: 20
     enabled: true
     particles: true
     delay: 20
@@ -214,7 +213,8 @@ Runes:
     duration: 20
     enabled: true
     particles: true
-    delay: 20
+    damagermessage: '&cYou have been injured due to your opponent's thorns!'
+    thornsdamage: 1
   runeofrepair:
     name: '&c&lRune of Repair'
     lore1: '&7Repair your armor to full durability'
