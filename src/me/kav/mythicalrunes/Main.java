@@ -68,6 +68,7 @@ public class Main extends JavaPlugin implements hashmaps {
     public String prefix = this.coloredString("prefix");
     public String alreadyactivemessage = this.coloredString("alreadyactivemessage");
     public String youmayuseagainmessage = this.coloredString("youmayuseagainmessage");
+    public String usemessage = this.coloredString("consumemessage");
 	
 	//Add auto updater and licensing feature
 	@Override
