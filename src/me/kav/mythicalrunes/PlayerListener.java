@@ -608,7 +608,7 @@ public class PlayerListener implements Listener, hashmaps {
 							z.setTarget((LivingEntity) e);
 							z.damage(plugin.configInt("Runes.runeofminions.miniondamage"));
 							z.setHealth(plugin.configInt("Runes.runeofminions.minionhealth"));
-							z.setCustomName(plugin.coloredString("Runes.runeofmonions.minionname"));
+							z.setCustomName(plugin.coloredString("Runes.runeofminions.minionname"));
 							z.setCustomNameVisible(true);
 							Integer task2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin,
 									new Runnable() {
