@@ -519,12 +519,7 @@ public class PlayerListener implements Listener, hashmaps {
 									ChatColor.DARK_RED + "You have incinerated " + ChatColor.RED + found.getName());
 						}
 					}
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							player.sendMessage(plugin.prefix + " " + plugin.coloredString("Runes.runeofincineration.expiremessage"));
-						}
-					}.runTaskLater(this.plugin, plugin.getDuration("runeofincineration")*20);
+		
 					new BukkitRunnable() {
 
 						@Override
@@ -1112,7 +1107,8 @@ public class PlayerListener implements Listener, hashmaps {
 					player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 				}
 			} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofpoison)) {
-				if (plugin.isEnabled("runeofpoison")) {
+				if (plugin.isEnabled("runeofsickening")) {
+					int radius = plugin.configInt("Runes.runeofsickening.radius");
 				if (!(alreadyused.containsKey(player))) {
 					if (player.getInventory().getItemInHand().getAmount() == 1) {
 						inventory.removeItem(player.getInventory().getItemInHand());
@@ -1121,10 +1117,10 @@ public class PlayerListener implements Listener, hashmaps {
 							.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 					player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 					alreadyused.put(player, player);
-					for (Entity e : player.getNearbyEntities(5, 256, 5)) {
+					for (Entity e : player.getNearbyEntities(radius, radius, radius)) {
 						if (e instanceof Player) {
 							Player found = (Player) e;
-							if (plugin.particleson("runeofpoison")) {
+							if (plugin.particleson("runeofsickening")) {
 							WarpEffect smokeEffect = new WarpEffect(em);
 						
 							smokeEffect.setEntity(found);
@@ -1141,9 +1137,9 @@ public class PlayerListener implements Listener, hashmaps {
 								public void run() {
 									smokeEffect.cancel();
 								}
-							}.runTaskLater(this.plugin, plugin.getDuration("runeofpoison")*20);
+							}.runTaskLater(this.plugin, plugin.getDuration("runeofsickening")*20);
 							}
-							found.addPotionEffect(new PotionEffect(PotionEffectType.POISON, plugin.getDuration("runeofpoison")*20, plugin.getAmplifier("runeofpoison")));
+							found.addPotionEffect(new PotionEffect(PotionEffectType.POISON, plugin.getDuration("runeofsickening")*20, plugin.getAmplifier("runeofsickening")));
 							player.sendMessage(plugin.prefix + ChatColor.DARK_PURPLE + " You have sickened " + ChatColor.LIGHT_PURPLE
 									+ found.getName());
 							found.sendMessage(plugin.prefix + ChatColor.DARK_PURPLE + " You have been sickened by "
@@ -1158,7 +1154,7 @@ public class PlayerListener implements Listener, hashmaps {
 							player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
 
 						}
-					}.runTaskLater(this.plugin, plugin.getDelay("runeofpoison")*20);
+					}.runTaskLater(this.plugin, plugin.getDelay("runeofsickening")*20);
 				} else {
 					player.sendMessage(plugin.prefix + " " + plugin.alreadyactivemessage);
 				}

@@ -11,6 +11,7 @@ Runes:
     lore3: '&bPotion Rune'
     amplifier: 0
     duration: 20
+    expiremessage: '&cThe effects of the rune of speed have now run out'
     enabled: true
     particles: true
     delay: 20
@@ -22,6 +23,7 @@ Runes:
     amplifier: 0
     duration: 20
     enabled: true
+    expiremessage: '&cThe effects of the rune of speed have now run out'
     particles: true
     delay: 20
   runeofinvisibility:
@@ -30,6 +32,7 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&bPotion Rune'
     duration: 20
+    expiremessage: '&cThe effects of the rune of speed have now run out'
     enabled: true
     delay: 20
   runeofdestruction:
@@ -47,7 +50,6 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
     expiremessage: '&cThe ability of the rune of incineration has run out'
-    duration: 20
     firetime: 3
     radius: 3
     enabled: true
@@ -73,8 +75,10 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
     amplifier: 0
-    duration: 20
+    duration: 3
+    expiremessage: '&cThe effects of the rune of speed have now run out'
     enabled: true
+    radius: 3
     particles: true
     delay: 20
   runeofhealing:
