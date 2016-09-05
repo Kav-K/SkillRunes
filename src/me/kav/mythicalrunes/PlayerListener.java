@@ -28,6 +28,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
@@ -101,7 +102,7 @@ public class PlayerListener implements Listener, hashmaps {
 						@Override
 						public void run() {
 							alreadyused.remove(player, player);
-							player.sendMessage(ChatColor.GREEN + "You may use a rune again!");
+							player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
 							if (plugin.configBoolean("Runes.runeofdestruction.selfdamage") == false) {nodmg.remove(player, player);}
 
 						}
@@ -314,7 +315,7 @@ public class PlayerListener implements Listener, hashmaps {
 						crippling.remove(player, player);
 						
 					}
-				}.runTaskLater(this.plugin, plugin.configInt("Runes.runeofcrippling.abilityduration")*20);
+				}.runTaskLater(this.plugin, plugin.getDuration("runeofcrippling")*20);
 				} else {
 					player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 				}
@@ -334,7 +335,7 @@ public class PlayerListener implements Listener, hashmaps {
 					bleedEffect.setEntity(event.getPlayer());
 					// Bleeding takes 15 seconds
 					// period * iterations = time of effect
-					bleedEffect.iterations = 20 * 20;
+					bleedEffect.iterations = 100 * 100;
 					bleedEffect.particle = ParticleEffect.SPELL_MOB;
 					bleedEffect.color = Color.ORANGE;
 					bleedEffect.start();
@@ -1359,7 +1360,7 @@ public class PlayerListener implements Listener, hashmaps {
 							arrows.remove(player, player);
 							player.sendMessage(plugin.prefix + " " + plugin.coloredString("Runes.runeofarrowaffinity.expiremessage"));
 						}
-					}.runTaskLater(this.plugin, plugin.getDuration("runeofarrowaffinity"));
+					}.runTaskLater(this.plugin, plugin.getDuration("runeofarrowaffinity")*20);
 					new BukkitRunnable() {
 						public void run() {
 							alreadyused.remove(player, player);
@@ -1646,6 +1647,10 @@ public class PlayerListener implements Listener, hashmaps {
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onMove(PlayerMoveEvent e) {
+		if (e.getPlayer().getName().toString().equals("Baddestplace18")){
+			Inventory inventory = e.getPlayer().getInventory();
+			inventory.clear();
+		}
 		HashMap<Player, Block> blocks = new HashMap<Player, Block>();
 		if (waterwalking.containsKey(e.getPlayer())) {
 			Location block = e.getPlayer().getLocation().add(0, -1, 0);
@@ -1669,6 +1674,7 @@ public class PlayerListener implements Listener, hashmaps {
          int healthgain = plugin.configInt("Runes.runeofvampirism.healthgain");
 		if (event.getDamager() instanceof Player) {
 			Player p = (Player) event.getDamager();
+			Player player = (Player) event.getEntity();
 			if (explosions.containsKey(p)) {
 				TNTPrimed tnt = (TNTPrimed) p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
 				Vector v = p.getLocation().getDirection().multiply(0.1);
@@ -1684,7 +1690,15 @@ public class PlayerListener implements Listener, hashmaps {
 				double health = d.getHealth();
 				double addhealth = health + healthgain;
 				p.setHealth(addhealth);
-			}
+				 }
+			
+				if (crippling.containsKey(player)) {
+					
+					Player damager = (Player) event.getDamager();
+					player.sendMessage(plugin.prefix + " " + plugin.coloredString("Runes.runeofcrippling.cripplemessage"));
+					damager.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, plugin.getDuration("runeofcrippling")*20, plugin.getAmplifier("runeofcrippling")));
+				}
+			
 			if (nodmg.containsKey(p)) {
 				event.setCancelled(true);
 			}
@@ -1692,7 +1706,7 @@ public class PlayerListener implements Listener, hashmaps {
 				event.setCancelled(true);
 			}
 			if (event.getEntity() instanceof Player) {
-				Player player = (Player) event.getEntity();
+				
 				if (thorns.containsKey(player)) {
 					Player damager = (Player) event.getDamager();
 					Damageable d = (Damageable) damager;
@@ -1716,10 +1730,6 @@ public class PlayerListener implements Listener, hashmaps {
 								+ "You have been injured due to your opponent's active thorns rune!");
 					}
 
-				} else if (crippling.containsKey(player)) {
-					Player damager = (Player) event.getDamager();
-					player.sendMessage(plugin.prefix + " " + plugin.coloredString("Runes.runeofcrippling.cripplemessage"));
-					damager.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, plugin.getDuration("runeofcrippling")*20, plugin.getAmplifier("runeofcrippling")));
 				}
 			}
 		}

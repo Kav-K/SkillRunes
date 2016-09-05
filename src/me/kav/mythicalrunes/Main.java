@@ -22,15 +22,15 @@ public class Main extends JavaPlugin implements hashmaps {
 	@Override
 	public void onEnable() {
     loadConfiguration();
+    this.reloadConfig();
     System.out.println(this.getConfig().getString("Runes.runeofspeed.lore1"));
 	this.getCommand("runes").setExecutor(new testCommand(this));
 	new PlayerListener(this);
 
 	
  	}
-	
-	
-	public  String runeofspeed = this.coloredString("Runes.runeofspeed.name");
+
+	public String runeofspeed = this.coloredString("Runes.runeofspeed.name");
 	public String runeofstrength = this.coloredString("Runes.runeofstrength.name");
 	public String runeofinvis = this.coloredString("Runes.runeofinvisibility.name");
 	public String runeofdestruction = this.coloredString("Runes.runeofdestruction.name");
@@ -68,12 +68,13 @@ public class Main extends JavaPlugin implements hashmaps {
     public String prefix = this.coloredString("prefix");
     public String alreadyactivemessage = this.coloredString("alreadyactivemessage");
     public String youmayuseagainmessage = this.coloredString("youmayuseagainmessage");
-    public String usemessage = this.coloredString("consumemessage");
+    public String usemessage = this.coloredString("consumemessage"); 
+
 	
 	//Add auto updater and licensing feature
 	@Override
 	public void onDisable() {
-		this.saveConfig();
+	
 
 	}
 	public void loadConfiguration() {

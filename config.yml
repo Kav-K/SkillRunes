@@ -276,7 +276,9 @@ Runes:
     name: '&6&lRune of Repellant'
     lore1: '&7Repel thy enemies!'
     lore2: '&7Right click to use'
-    lore3: '&6Protection Rune'
+    lore3: '&6Protection Rune' 
+    expiremessage: '&cThe effects of repellant have run out'
+    duration: 20
     radius: 2
     enabled: true
     particles: true
@@ -318,6 +320,7 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
     cripplemessage: '&cYou have crippled your opponent!'
+    expiremessage: '&cThe effects of the rune of crippling have run out'
     amplifier: 0
     abilityduration: 20
     duration: 3
