@@ -3,6 +3,7 @@ disabledmessage: 'This rune is disabled!'
 alreadyactivemessage: 'You already have an active rune!'
 youmayuseagainmessage: 'You may now use a rune again'
 consumemessage: '&cAs you use this mythical rune, it shatters into pieces'
+regionblockedmessage: '&cYou may not use runes in this region'
 Runes:
   runeofspeed:
     name: '&b&lRune of Speed'

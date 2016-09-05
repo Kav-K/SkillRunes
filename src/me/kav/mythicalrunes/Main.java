@@ -3,8 +3,11 @@ package me.kav.mythicalrunes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,7 +15,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import de.slikey.effectlib.EffectManager;
 
@@ -25,10 +31,32 @@ public class Main extends JavaPlugin implements hashmaps {
     this.reloadConfig();
     System.out.println(this.getConfig().getString("Runes.runeofspeed.lore1"));
 	this.getCommand("runes").setExecutor(new testCommand(this));
-	new PlayerListener(this);
+	if (this.hasParticles()) {
+		System.out.println("EffectLub found! Awesome! Enabling your sexy effects");
+	} else if (!(this.hasParticles())) {
+		System.out.println("EffectLub not found! Damn, Gotta disable particle effects now :(");
+	}
+	
+	if (this.testWE() == false && this.testWG() == false) {
+		System.out.println("WorldEdit/WorldGuard not found! Disabling support");
+		new PlayerListener(this);
+		
+	} else if (this.testWE() == true && this.testWG() == false) {
+		System.out.println("WorldEdit found but no worldguard! You need both!");
+		new PlayerListener(this);
+	} else if (this.testWG() == true && this.testWE() == false) {
+		System.out.println("WorldGuard found but no WorldEdit! You need both!");
+		new PlayerListener(this);
+	} else if (this.testWG() == true && this.testWE() == true) {
+		new PlayerListenerWG(this);
+		System.out.println("WG/WE Found! Enabling support!");
+	}
+	
+
 
 	
  	}
+	
 
 	public String runeofspeed = this.coloredString("Runes.runeofspeed.name");
 	public String runeofstrength = this.coloredString("Runes.runeofstrength.name");
@@ -69,6 +97,7 @@ public class Main extends JavaPlugin implements hashmaps {
     public String alreadyactivemessage = this.coloredString("alreadyactivemessage");
     public String youmayuseagainmessage = this.coloredString("youmayuseagainmessage");
     public String usemessage = this.coloredString("consumemessage"); 
+    public String nonregionmessage = this.coloredString("regionblockedmessage");
 
 	
 	//Add auto updater and licensing feature
@@ -86,7 +115,7 @@ public class Main extends JavaPlugin implements hashmaps {
 		  return i;
 		  
 		  
-	  }
+	  } 
 	  public  String coloredString(String string) {
 		  String message = this.getConfig().getString(string);
 		  String colored = ChatColor.translateAlternateColorCodes('&', message);
@@ -636,6 +665,74 @@ public class Main extends JavaPlugin implements hashmaps {
 	   boolean i = this.configBoolean("Runes."+string+".particles");
 	   return i;
    }
+   public boolean hasParticles() {
+	   if ( this.getServer().getPluginManager().isPluginEnabled("EffectLib")) {
+			return true;
+		}
+	   else{
+		   return false;
+	   }
+   }
+   public World getPlayerWorld(Player player) {
+	   World asd = player.getWorld();
+	   return asd;
+   }
+   public Location getPlayerLocation(Player player) {
+	   Location asd = player.getLocation();
+	   return asd;
+   }
+   public boolean hasWE() {
+	   if ( this.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
+			return true;
+		}
+	   else{
+		   return false;
+	   }
+   }
+   public boolean hasWG() {
+	   if ( this.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+			return true;
+		}
+	   else{
+		   return false;
+	   }
+   }
+
+	   
+	   
+	   
+	   
+	   
+	   
+   
+  public WorldGuardPlugin getWorldGuard() {
+	    Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+	 
+	    // WorldGuard may not be loaded
+	    if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+	        return null; // Maybe you want throw an exception instead
+	    }
+	 
+	    return (WorldGuardPlugin) plugin;
+	}
+  public boolean testWG() {
+	  Plugin plugin2 = getServer().getPluginManager().getPlugin("WorldGuard");
+	  
+	  if (plugin2 == null) {
+		  return false;
+	  } else {
+		  return true;
+	  }
+	  
+  }
+  public boolean testWE() {
+	  Plugin plugin3 = getServer().getPluginManager().getPlugin("WorldEdit");
+	  if (plugin3 == null) {
+		  return false;
+	  } else {
+		  return true;
+	  }
+  }
 		    
 
 	
