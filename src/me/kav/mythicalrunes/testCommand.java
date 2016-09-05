@@ -51,6 +51,7 @@ public class testCommand implements CommandExecutor, hashmaps {
 			plugin.runeOfRepair(player);
 			plugin.runeOfRepellant(player);
              plugin.runeOfSickening(player);
+             plugin.runeOfLightning(player);
              plugin.runeOfStrength(player);
              plugin.runeOfThorns(player);
              plugin.runeOfVampirism(player);

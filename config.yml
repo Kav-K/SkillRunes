@@ -37,18 +37,19 @@ Runes:
     lore1: '&7Create an explosion at your feet'
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
-    amplifier: 0
-    duration: 20
     enabled: true
-    particles: true
     delay: 20
+    selfdamage: false
+    explodeticks: 3
   runeofincineration:
     name: '&5&lRune of Incineration'
     lore1: '&7Burn enemies around you'
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
-    amplifier: 0
+    expiremessage: '&cThe ability of the rune of incineration has run out'
     duration: 20
+    firetime: 3
+    radius: 3
     enabled: true
     particles: true
     delay: 20
@@ -57,11 +58,15 @@ Runes:
     lore1: '&7Launch thy body into the sky'
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
-    amplifier: 0
-    duration: 20
+    launchdelay: 3
     enabled: true
+    expiremessage: '&cYou have stopped being launched'
     particles: true
     delay: 20
+    upwardslaunchvector: 10
+    horizontalvector1: 0
+    horizontalvector2: 0
+    launchmessage: '&bPrepare to be launched!'
   runeofsickening:
     name: '&5&lRune of Sickening'
     lore1: '&7Poison those around you'
@@ -86,19 +91,19 @@ Runes:
     lore1: '&7Immortality for a period of time'
     lore2: '&7Right click to use'
     lore3: '&6Protection Rune'
-    amplifier: 0
     duration: 20
     enabled: true
     particles: true
+    expiremessage: '&cThe effects of the rune of protection have run out'
     delay: 20
   runeofblinding:
     name: '&5&lRune of Blinding'
     lore1: '&7Blind those around you'
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
-    amplifier: 0
     duration: 20
     enabled: true
+    radius: 5
     particles: true
     delay: 20
   runeofarrowaffinity:
@@ -108,6 +113,7 @@ Runes:
     lore3: '&7To shoot, left click with nothing in hand'
     lore4: '&cSpecial Rune'
     amplifier: 0
+    expiremessage: '&cThe effects of arrow affinity have run out'
     duration: 20
     enabled: true
     particles: true
@@ -117,8 +123,7 @@ Runes:
     lore1: '&7Clear all potion effects from thyself'
     lore2: '&7Right click to use'
     lore3: '&fSpecial Rune'
-    amplifier: 0
-    duration: 20
+    cleansingmessage: '&bYou have been cleansed!'
     enabled: true
     particles: true
     delay: 20
@@ -127,18 +132,18 @@ Runes:
     lore1: '&7Walk on water for a period of time'
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
-    amplifier: 0
     duration: 20
     enabled: true
     particles: true
+    expiremessage: '&cThe effects of water walking have run out'
     delay: 20
   runeoflightning:
     name: '&5&lRune of Lightning'
     lore1: '&7Strike down lightning on nearby enemies'
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
-    amplifier: 0
     duration: 20
+    radius: 5
     enabled: true
     particles: true
     delay: 20
@@ -148,7 +153,8 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&cWarning.. With great power comes great recoil'
     lore4: '&cSpecial Rune'
-    amplifier: 0
+    expiremessage: '&cThe effects of the rune of extreme power have worn off'
+    activatemessage: '&cYou have been granted extreme power..'
     duration: 20
     enabled: true
     particles: true
@@ -159,6 +165,7 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
     amplifier: 0
+    radius: 5
     duration: 20
     enabled: true
     particles: true
@@ -179,7 +186,8 @@ Runes:
     lore1: '&7Multiple arrows shot from your bow'
     lore2: '&7Right click to use'
     lore3: '&aBow Rune'
-    amplifier: 0
+    arrows: 4
+    expiremessage: '&cThe effects of the rune of barrage have run out'
     duration: 20
     enabled: true
     particles: true
@@ -213,7 +221,7 @@ Runes:
     duration: 20
     enabled: true
     particles: true
-    damagermessage: '&cYou have been injured due to your opponent's thorns!'
+    damagermessage: '&cYou have been injured due to your opponents thorns!'
     thornsdamage: 1
   runeofrepair:
     name: '&c&lRune of Repair'
@@ -245,29 +253,27 @@ Runes:
     lore1: '&7Spread patches of fire with your arrows'
     lore2: '&7Right click to use'
     lore3: '&aBow Rune'
-    amplifier: 0
     duration: 20
     enabled: true
     particles: true
     delay: 20
+    expiremessage: '&cThe effects of the rune of flaming arrows have run out'
   runeofflamethrowing:
     name: '&c&lRune of FlameThrowing'
     lore1: '&7Summon fireballs with your fists!'
     lore2: '&7Right click to use'
     lore3: '&7To shoot, left click with nothing in hand'
     lore4: '&cSpecial Rune'
-    amplifier: 0
     duration: 20
     enabled: true
-    particles: true
     delay: 20
+    expiremessage: '&cThe effects of the rune of flamethrowing have run out'
   runeofrepellant:
     name: '&6&lRune of Repellant'
     lore1: '&7Repel thy enemies!'
     lore2: '&7Right click to use'
     lore3: '&6Protection Rune'
-    amplifier: 0
-    duration: 20
+    radius: 2
     enabled: true
     particles: true
     delay: 20
@@ -276,18 +282,19 @@ Runes:
     lore1: '&7Summon lightning on arrow hit'
     lore2: '&7Right click to use'
     lore3: '&aBow Rune'
-    amplifier: 0
     duration: 20
     enabled: true
-    particles: true
     delay: 20
   runeofpoisonarrows:
     name: '&a&lRune of Poison Arrows'
     lore1: '&7Poison nearby enemies on arrow hit'
     lore2: '&7Right click to use'
     lore3: '&4AoE&8/&aBow &4R&au&4n&ae'
+    expiremessage: '&5The effects of the rune of poison arrows have run out'
+    abilityduration: 30
     amplifier: 0
-    duration: 20
+    duration: 3
+    radius: 3
     enabled: true
     particles: true
     delay: 20
@@ -306,10 +313,11 @@ Runes:
     lore1: '&7Weaken those you hit!'
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
+    cripplemessage: '&cYou have crippled your opponent!'
     amplifier: 0
-    duration: 20
+    abilityduration: 20
+    duration: 3
     enabled: true
-    particles: true
     delay: 20
   runeofminions:
     name: '&4&lRune of Minions'
@@ -337,7 +345,6 @@ Runes:
     lore1: '&7Paralyze those around you'
     lore2: '&7Right click to use'
     lore3: '&4AoE Rune'
-    amplifier: 0
     duration: 20
     enabled: true
     particles: true
