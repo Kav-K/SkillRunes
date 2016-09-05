@@ -83,7 +83,7 @@ public class PlayerListenerWG implements Listener, hashmaps {
 				ApplicableRegionSet set = WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation());
                       
 				PlayerInventory inventory = player.getInventory();
-               if (!(set.allows(DefaultFlag.SLEEP))) {
+               if (set.allows(DefaultFlag.SLEEP)) {
 				if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofdestruction)) {
 					if (plugin.isEnabled("runeofdestruction")) {
 						if (!(alreadyused.containsKey(player))) {
@@ -127,7 +127,6 @@ public class PlayerListenerWG implements Listener, hashmaps {
 						} else {
 							player.sendMessage(plugin.prefix + " " + plugin.alreadyactivemessage);
 						}
-					
 				} else {
 					player.sendMessage(plugin.prefix + " " + plugin.nonregionmessage);
 				}
