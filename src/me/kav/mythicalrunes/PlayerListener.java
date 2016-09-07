@@ -91,7 +91,11 @@ public class PlayerListener implements Listener, hashmaps {
 							if (player.getInventory().getItemInHand().getAmount() == 1) {
 								inventory.removeItem(player.getInventory().getItemInHand());
 							}
-							player.sendMessage(plugin.prefix + " " + plugin.usemessage);
+							try {
+							player.sendMessage(plugin.prefix + " " + plugin.usemessage); }
+							catch (Exception e) {
+								System.out.println("Error in configuration files!" + e.toString());
+							}
 							player.getInventory().getItemInHand()
 									.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 							Location location = player.getEyeLocation();
@@ -116,7 +120,11 @@ public class PlayerListener implements Listener, hashmaps {
 								@Override
 								public void run() {
 									alreadyused.remove(player, player);
-									player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+									try {
+									player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage); }
+									catch (Exception e) {
+										System.out.println("Error in configuration files!" + e.toString());
+									}
 									if (plugin.configBoolean("Runes.runeofdestruction.selfdamage") == false) {
 										nodmg.remove(player, player);
 									}
@@ -125,10 +133,18 @@ public class PlayerListener implements Listener, hashmaps {
 							}.runTaskLater(this.plugin, plugin.getDelay("runeofdestruction") * 20);
 
 						} else {
+							try {
 							player.sendMessage(plugin.prefix + " " + plugin.alreadyactivemessage);
+						} catch (Exception e) {
+							System.out.println("Error in configuration files!" + e.toString());
+						}
 						}
 					} else {
+						try {
 						player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
+					} catch (Exception e) {
+						System.out.println("Error in configuration files!" + e.toString());
+					}
 					}
 
 				} else if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofclarity)) {
@@ -1855,11 +1871,16 @@ public class PlayerListener implements Listener, hashmaps {
 						damager.sendMessage(plugin.prefix + " " + ChatColor.RED
 								+ "You have been injured due to your opponent's active thorns rune!");
 					}
-
+					String closer = "Closer";
+//These close and prevent nullpointers
 				}
+				String closer = "Closer";
 			}
+			String closer = "Closer";
 		}
+		String closer = "Closer";
 	}
+
 
 	@EventHandler
 	public void barrage(EntityShootBowEvent event) {
@@ -1878,7 +1899,9 @@ public class PlayerListener implements Listener, hashmaps {
 			} else {
 			}
 		} else {
+			String closer = "Closer";
 		}
+		String closer = "Closer";
 	}
 
 	@EventHandler
@@ -1951,12 +1974,20 @@ public class PlayerListener implements Listener, hashmaps {
 										plugin.getDuration("runeofpoisonarrows") * 20,
 										plugin.getAmplifier("runeofpoisonarrows")));
 							}
+							String closer = "Closer";
 						}
+						String closer = "Closer";
 					}
+					String closer = "Closer";
 
+					
 				}
+				String closer = "Closer";
 			}
+			String closer = "Closer";
 		}
+		String closer = "Closer";
 	}
+	String closer = "Closer";
 
 }

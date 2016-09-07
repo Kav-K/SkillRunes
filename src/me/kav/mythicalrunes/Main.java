@@ -32,7 +32,7 @@ public class Main extends JavaPlugin implements hashmaps {
     System.out.println(this.getConfig().getString("Runes.runeofspeed.lore1"));
 	this.getCommand("runes").setExecutor(new testCommand(this));
 	if (this.hasParticles()) {
-		System.out.println("EffectLub found! Awesome! Enabling your sexy effects");
+		System.out.println("EffectLib found! Awesome! Enabling your effects!");
 	} else if (!(this.hasParticles())) {
 		System.out.println("EffectLub not found! Damn, Gotta disable particle effects now :(");
 	}
@@ -105,6 +105,72 @@ public class Main extends JavaPlugin implements hashmaps {
 	public void onDisable() {
 	
 
+	}
+	
+	public String getUseMessage(){
+		String i = "null";
+		try {
+			i = this.coloredString("consumemessage");
+			return i;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("Configuration error! Please check your configuration for consumemessage, plugin has recovered");
+			return ChatColor.RED + "As you use this mythical rune, it shatters into pieces.";
+		}
+		
+		
+		
+		
+	}
+	
+	public String getDisabledMessage() {
+		String i = "null";
+		try {
+			i = this.coloredString("disabledmessage");
+			return i;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("Configuration error! Please check your config file for disabledmessage, plugin has recovered");
+			return ChatColor.RED + "This rune is disabled!";
+		}	
+	}
+	public String getNonRegionMessage() {
+		String i = "null";
+		try {
+			i = this.coloredString("regionblockedmessage");
+			return i;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("Configuration error! please check your config file for alreadyactivemessage, plugin has recovered");
+			return ChatColor.RED + "You already have a rune active!";
+			
+		}
+		
+		
+		
+	}
+	public String getYouMayUseAgainMessage() {
+		String i = "null";
+		try {
+			i = this.coloredString("youmayuseagainmessage");
+			return i;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("Configuration error! please check your config file for youmayuseagainmessage, plugin has recovered");
+			return ChatColor.GREEN + "You may now use a rune again!";
+		}
+		
+	}
+	public String getAlreadyActiveMessage() {
+		String i = "null";
+		try {
+			i = this.coloredString("alreadyactivemessage");
+			return i;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("Configuration error! please check your config file for regionblockedmessage, plugin has recovered");
+			return ChatColor.RED + "You may not use this rune in this region";
+		}
 	}
 	public void loadConfiguration() {
        this.getConfig().options().copyDefaults(true);
