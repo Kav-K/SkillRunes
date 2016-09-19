@@ -1,6 +1,7 @@
 package me.kav.skillrunes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface hashmaps {
     List<String> arrows = new ArrayList<String>();
     List<String> waterwalking = new ArrayList<String>();
     public static HashMap<String, ItemStack> runes = new HashMap<String, ItemStack>();
+    List<String> runelist = Arrays.asList("runeofspeed", "runeofbarraging", "runeoflightning", "runeofblinding", "runeofcrippling", "runeofdestruction", "runeofextremepower", "runeofflamingarrows","runeofflamethrowing", "runeofflying", "runeofhaste", "runeofhealing", "runeofincineration", "runeofinvisibility", "runeoflaunching", "runeofleaping", "runeoflightningarrows", "runeofminions", "runeofparalyzing", "runeofpoisonousarrows", "runeofregeneration", "runeofprotection", "runeofrepair", "runeofrepellant", "runeofsickening", "runeoflightning", "runeofthorns", "runeofvampirism", "runeofvolatilearrows", "runeofwither", "runeofarrowaffinity", "runeofwaterwalking", "runeofclarity", "runeofbreathing");
+    
 }

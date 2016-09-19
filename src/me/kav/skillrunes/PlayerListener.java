@@ -62,7 +62,8 @@ public class PlayerListener implements Listener, hashmaps {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	// INITIALIZE THE VARIABLES FOR THE BLOCKS HERE \\
+	// get string variables
+	
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
@@ -108,7 +109,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 											if (plugin.configBoolean("Runes.runeofdestruction.selfdamage") == false) {
 												try {
 													nodmg.remove(player.getName().toString());
@@ -134,7 +135,7 @@ public class PlayerListener implements Listener, hashmaps {
 									if (player.getInventory().getItemInHand().getAmount() == 1) {
 										inventory.removeItem(player.getInventory().getItemInHand());
 									}
-									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
+									player.sendMessage(plugin.getPluginPrefix() + " " + plugin.getUseMessage());
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
@@ -173,7 +174,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofclarity") * 20);
@@ -191,7 +192,7 @@ public class PlayerListener implements Listener, hashmaps {
 									if (player.getInventory().getItemInHand().getAmount() == 1) {
 										inventory.removeItem(player.getInventory().getItemInHand());
 									}
-									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
+									player.sendMessage(plugin.getPluginPrefix() + " " + plugin.getUseMessage());
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
@@ -243,7 +244,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofparalyzing") * 20);
@@ -261,7 +262,7 @@ public class PlayerListener implements Listener, hashmaps {
 									if (player.getInventory().getItemInHand().getAmount() == 1) {
 										inventory.removeItem(player.getInventory().getItemInHand());
 									}
-									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
+									player.sendMessage(plugin.getPluginPrefix() + " " + plugin.getUseMessage());
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
@@ -282,7 +283,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 											alreadyused.remove(player, player);
 
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeoflightningarrows") * 20);
@@ -324,7 +325,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 											alreadyused.remove(player, player);
 
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofpoisonarrows"));
@@ -349,7 +350,7 @@ public class PlayerListener implements Listener, hashmaps {
 								}
 								new BukkitRunnable() {
 									public void run() {
-										player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+										player.sendMessage(plugin.prefix + " " + plugin.again);
 										alreadyused.remove(player, player);
 									}
 								}.runTaskLater(this.plugin, plugin.getDelay("runeofcrippling") * 20);
@@ -443,7 +444,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofrepellant") * 20);
@@ -479,7 +480,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 											alreadyused.remove(player, player);
 
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofflamethrowing") * 20);
@@ -541,7 +542,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 											alreadyused.remove(player, player);
 
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofflamingarrows") * 20);
@@ -607,7 +608,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofincineration") * 20);
@@ -663,7 +664,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 											alreadyused.remove(player, player);
 
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofspeed") * 20);
@@ -712,7 +713,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDuration("runeofstrength") * 20);
@@ -785,7 +786,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofrepair"));
@@ -836,7 +837,7 @@ public class PlayerListener implements Listener, hashmaps {
 												public void run() {
 													alreadyused.remove(player, player);
 													player.sendMessage(
-															plugin.prefix + " " + plugin.youmayuseagainmessage);
+															plugin.prefix + " " + plugin.again);
 												}
 											}.runTaskLater(this.plugin, plugin.getDelay("runeofminions"));
 										}
@@ -869,7 +870,7 @@ public class PlayerListener implements Listener, hashmaps {
 
 											player.setFlying(false);
 											player.setAllowFlight(false);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 											try {
 												player.sendMessage(plugin.prefix + " "
 														+ plugin.coloredString("Runes.runeofflying.expiremessage"));
@@ -904,7 +905,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + "" + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + "" + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofinvisibility") * 20);
@@ -978,7 +979,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofvampirism") * 20);
@@ -1029,7 +1030,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofleaping") * 20);
@@ -1073,7 +1074,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofhealing") * 20);
@@ -1126,7 +1127,7 @@ public class PlayerListener implements Listener, hashmaps {
 											} catch (Exception e) {
 
 											}
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 											try {
 												player.sendMessage(plugin.prefix + " "
 														+ plugin.coloredString("Runes.runeofthorns.expiremessage"));
@@ -1174,7 +1175,7 @@ public class PlayerListener implements Listener, hashmaps {
 											@Override
 											public void run() {
 												alreadyused.remove(player, player);
-												player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+												player.sendMessage(plugin.prefix + " " + plugin.again);
 
 											}
 										}.runTaskLater(this.plugin, 400);
@@ -1245,7 +1246,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofprotection") * 20);
@@ -1309,7 +1310,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofsickening") * 20);
@@ -1373,7 +1374,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeoflaunching") * 20);
@@ -1431,7 +1432,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofblinding") * 20);
@@ -1487,7 +1488,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeoflightning") * 20);
@@ -1526,7 +1527,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofwaterwalking") * 20);
 								} else {
@@ -1562,7 +1563,7 @@ public class PlayerListener implements Listener, hashmaps {
 									new BukkitRunnable() {
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofarrowaffinity") * 20);
 								} else {
@@ -1589,7 +1590,7 @@ public class PlayerListener implements Listener, hashmaps {
 									@Override
 									public void run() {
 										alreadyused.remove(player, player);
-										player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+										player.sendMessage(plugin.prefix + " " + plugin.again);
 
 									}
 								}.runTaskLater(this.plugin, plugin.getDelay("runeofbarraging") * 20);
@@ -1642,7 +1643,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofextremepower") * 20);
@@ -1691,7 +1692,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofregeneration"));
@@ -1728,7 +1729,7 @@ public class PlayerListener implements Listener, hashmaps {
 										public void run() {
 											alreadyused.remove(player, player);
 
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofvolatilearrows") * 20);
@@ -1777,7 +1778,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofhaste") * 20);
@@ -1834,7 +1835,7 @@ public class PlayerListener implements Listener, hashmaps {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
-											player.sendMessage(plugin.prefix + " " + plugin.youmayuseagainmessage);
+											player.sendMessage(plugin.prefix + " " + plugin.again);
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeofwither") * 20);
@@ -1911,6 +1912,7 @@ public class PlayerListener implements Listener, hashmaps {
 
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
+		try {
 		int healthgain = plugin.configInt("Runes.runeofvampirism.healthgain");
 		if (event.getDamager() instanceof Player) {
 			Player p = (Player) event.getDamager();
@@ -1979,6 +1981,9 @@ public class PlayerListener implements Listener, hashmaps {
 				}
 			}
 		}
+		}
+		} catch (Exception e) {
+			
 		}
 	}
 
