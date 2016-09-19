@@ -8,7 +8,7 @@ import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public interface hashmaps {
+public interface Caching {
 	List<String> nodmg = new ArrayList<String>();
     List<String> nodmg1 = new ArrayList<String>();
     List<String> explosions = new ArrayList<String>();

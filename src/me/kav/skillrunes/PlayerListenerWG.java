@@ -25,28 +25,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WGBukkit;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.AtomEffect;
 import de.slikey.effectlib.effect.ConeEffect;
@@ -56,12 +48,9 @@ import de.slikey.effectlib.effect.SmokeEffect;
 import de.slikey.effectlib.effect.WarpEffect;
 import de.slikey.effectlib.effect.WaveEffect;
 import de.slikey.effectlib.util.ParticleEffect;
-import com.sk89q.worldedit.BlockVector;
-
 import org.bukkit.Color;
-import org.bukkit.Effect;
 
-public class PlayerListenerWG implements Listener, hashmaps {
+public class PlayerListenerWG implements Listener, Caching {
 	Main plugin;
 
 	public PlayerListenerWG(Main passedPlugin) {
@@ -75,6 +64,7 @@ public class PlayerListenerWG implements Listener, hashmaps {
 		int explodeticks = plugin.configInt("Runes.runeofdestruction.explodeticks");
 		Action act = event.getAction();
 		Player player = event.getPlayer();
+		if (!(player == null)) {
 		try {
 
 			if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK) {
@@ -778,6 +768,7 @@ public class PlayerListenerWG implements Listener, hashmaps {
 										player.sendMessage(
 												plugin.prefix + ChatColor.RED + " You weren't wearing any boots!");
 									}
+									// This is not neccessary but we'll do it anyways! No harm done
 									try {
 										player.updateInventory();
 									} catch (Exception e) {
@@ -1872,7 +1863,10 @@ public class PlayerListenerWG implements Listener, hashmaps {
 				}
 			}
 		} catch (Exception e) {
-			String i = "Catch that exception boi";
+			String i = e.toString();
+		}
+		} else {
+			System.out.println("[SkillRunes] A null player tried to use a rune??");
 		}
 	}
 

@@ -1,20 +1,40 @@
+#The prefix shown before all messages from this plugin!
 prefix: '&e&lSkillRunes &7'
+#The message you see when a rune is disabled
 disabledmessage: '&cThis rune is disabled!'
+#The message you see when you try to use a rune but one is already active
 alreadyactivemessage: '&cYou already have an active rune!'
+#The message you see when you are able to use another rune again
 youmayuseagainmessage: '&cYou may now use a rune again'
+#The message you see when you use a rune
 consumemessage: '&cAs you use this mythical rune, it shatters into pieces'
+#The message you see when a rune is not allowed in a specific region
 regionblockedmessage: '&cYou may not use runes in this region'
+## 
+##                   CONFIGURATION FOR RUNES BELOW
+##       PLEASE BE VERY CAREFUL, WATCH YOUR STRING ENDINGS, and SPACING! 
+##            REMEMBER, NO TABBING IS ALLOWED! USE SPACEBAR ALWAYS!
+##     At the moment, you may NOT add more lore lines, use the existing ones and
+##                              edit them!
+##
 Runes:
   runeofspeed:
+  # The name and the 3 lore lines of the rune
     name: '&b&lRune of Speed'
     lore1: '&7Grant thyself with extreme agility'
     lore2: '&7Right click to use'
     lore3: '&bPotion Rune'
+#The potion effect amplifier (0, 1, 2)
     amplifier: 0
+#The duration of the effect
     duration: 20
+#The message you get when the rune effects run out
     expiremessage: '&cThe effects of the rune of speed have now run out'
+#is this rune enabled?	
     enabled: true
+#Do you want particles for this rune?	
     particles: true
+#How long should players have to wait before being able to use another rune again
     delay: 20
   runeofstrength:
     name: '&b&lRune of Strength'

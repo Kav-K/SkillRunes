@@ -6,6 +6,3 @@ commands:
    runes:
       description: Runes root command
       usage: /<command>
-   hellohello:
-      description: testing utils
-      usage: /<command>

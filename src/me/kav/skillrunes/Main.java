@@ -4,14 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -21,9 +17,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-import de.slikey.effectlib.EffectManager;
-
-public class Main extends JavaPlugin implements hashmaps {
+public class Main extends JavaPlugin implements Caching {
+	// HELLO DECOMPILER! I see you've decompiled this plugin and are reading it, I dont care if you are, but I do ask one thing,
+	// do NOT share the plugin with anybody else or send them a compiled .jar! Thanks!
+	//
+	//
+	//
+	//
+	//
 
 	@Override
 	public void onEnable() {
@@ -81,12 +82,13 @@ public class Main extends JavaPlugin implements hashmaps {
 		this.runeOfWaterWalking();
 		this.runeOfVolatileArrows();
 		this.runeOfWither();
+		// Check if effectLib is active
 		if (this.hasParticles()) {
 			System.out.println("[SkillRunes] EffectLib found! Enabling your effects!");
 		} else if (!(this.hasParticles())) {
 			System.out.println("[SkillRunes] EffectLib not found! Disabling particles");
 		}
-
+        // Test if WE and WG are active, test if one is active and not the other, etc
 		if (this.testWE() == false && this.testWG() == false) {
 			System.out.println("[SkillRunes] WorldEdit/WorldGuard not found! Disabling support");
 			new PlayerListener(this);
@@ -104,7 +106,7 @@ public class Main extends JavaPlugin implements hashmaps {
 		}
 
 	}
-
+    // Initialize the names that the playerlisteners check for
 	public String runeofspeed = this.coloredString("Runes.runeofspeed.name");
 	public String runeofstrength = this.coloredString("Runes.runeofstrength.name");
 	public String runeofinvis = this.coloredString("Runes.runeofinvisibility.name");
@@ -146,7 +148,7 @@ public class Main extends JavaPlugin implements hashmaps {
 	public String disabledmessage = this.getDisabledMessage();
 	public String again = this.getYouMayUseAgainMessage();
 
-	// Add auto updater and licensing feature
+	// METHODS BELOW FoR RUNE INITIALIZATION AND CONFIGURATION STRING/INT/BOOLEAN GETTERS!
 	@Override
 	public void onDisable() {
 
@@ -1122,12 +1124,4 @@ public class Main extends JavaPlugin implements hashmaps {
 		}
 	}
 
-	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-		if (alias.equalsIgnoreCase("hellohello")) {
-			Player player = (Player) sender;
-			player.sendMessage(this.getConfig().getString("Runes.runeofspeed.lore2"));
-		}
-
-		return false;
-	}
 }

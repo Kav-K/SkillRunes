@@ -1,5 +1,6 @@
 package me.kav.skillrunes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,19 +26,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import de.slikey.effectlib.EffectManager;
@@ -52,9 +49,8 @@ import de.slikey.effectlib.util.ParticleEffect;
 
 
 import org.bukkit.Color;
-import org.bukkit.Effect;
 
-public class PlayerListener implements Listener, hashmaps {
+public class PlayerListener implements Listener, Caching {
 	Main plugin;
 
 	public PlayerListener(Main passedPlugin) {
@@ -70,6 +66,8 @@ public class PlayerListener implements Listener, hashmaps {
 		int explodeticks = plugin.configInt("Runes.runeofdestruction.explodeticks");
 		Action act = event.getAction();
 		Player player = event.getPlayer();
+		if (!(player == null)) {
+		
 		try {
 
 			if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK) {
@@ -1864,12 +1862,15 @@ public class PlayerListener implements Listener, hashmaps {
 				}
 			}
 		} catch (Exception e) {
-			String i = "Exception handle that shit";
+			String i = e.toString();
+		}
+		} else {
+			System.out.println("[SkillRunes] A null player tried to use a rune?");
 		}
 }
 
 	@EventHandler
-	public void entityDamage(EntityDamageEvent event) {
+	public void entityDamage(EntityDamageEvent event)  {
 		Entity entity = event.getEntity();
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
