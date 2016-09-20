@@ -105,8 +105,7 @@ public class testCommand implements CommandExecutor, Caching {
 						+ "Give all runes to a player");
 				sender.sendMessage(ChatColor.YELLOW + "/runes give <player> <rune> - " + ChatColor.RED
 						+ "Give a rune to a player");
-				sender.sendMessage(ChatColor.YELLOW + "/runes reload - " + ChatColor.RED
-						+ "Reload config and plugin");
+				sender.sendMessage(ChatColor.YELLOW + "/runes reload - " + ChatColor.RED + "Reload config and plugin");
 				sender.sendMessage(ChatColor.RED + "================== " + ChatColor.YELLOW + "SkillRunes "
 						+ ChatColor.RED + "================");
 			} else {
@@ -114,16 +113,16 @@ public class testCommand implements CommandExecutor, Caching {
 			}
 		} else if (alias.equalsIgnoreCase("runes") && args.length == 1 && args[0].equals("reload")) {
 			if (sender.hasPermission("runes.reload")) {
-			plugin.getServer().getPluginManager().disablePlugin(plugin); 
-			plugin.getServer().getPluginManager().enablePlugin(plugin);
-			System.out.print("[SkillRunes] Plugin has been reloaded");
-			sender.sendMessage(plugin.prefix + ChatColor.RED + " Plugin has been reloaded! Please note that some active runes may have been cancelled!");
-			
+				plugin.getServer().getPluginManager().disablePlugin(plugin);
+				plugin.getServer().getPluginManager().enablePlugin(plugin);
+				System.out.print("[SkillRunes] Plugin has been reloaded");
+				sender.sendMessage(plugin.prefix + ChatColor.RED
+						+ " Plugin has been reloaded! Please note that some active runes may have been cancelled!");
+
 			} else if (!(sender.hasPermission("runes.reload"))) {
 				sender.sendMessage(plugin.prefix + ChatColor.RED + " No permission!");
 			}
-		}
-		else {
+		} else {
 			sender.sendMessage(plugin.prefix + " " + ChatColor.RED + "Invalid syntax!");
 		}
 

@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/KAVEEN/Desktop/learningjava/spigot-1.8-R0.1-SNAPSHOT-b1662.jar"/>
 	<classpathentry kind="lib" path="C:/Users/KAVEEN/Desktop/learningjava/worldguard-6.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/KAVEEN/Desktop/learningjava/worldedit-bukkit-6.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KAVEEN/Desktop/learningjava/HolographicDisplaysAPI_v2.1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

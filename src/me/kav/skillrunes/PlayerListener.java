@@ -37,6 +37,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
+
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.AtomEffect;
 import de.slikey.effectlib.effect.ConeEffect;
@@ -46,7 +50,6 @@ import de.slikey.effectlib.effect.SmokeEffect;
 import de.slikey.effectlib.effect.WarpEffect;
 import de.slikey.effectlib.effect.WaveEffect;
 import de.slikey.effectlib.util.ParticleEffect;
-
 
 import org.bukkit.Color;
 
@@ -59,7 +62,6 @@ public class PlayerListener implements Listener, Caching {
 	}
 
 	// get string variables
-	
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onUse(PlayerInteractEvent event) {
@@ -67,14 +69,15 @@ public class PlayerListener implements Listener, Caching {
 		Action act = event.getAction();
 		Player player = event.getPlayer();
 		if (!(player == null)) {
-		
-		try {
 
-			if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK) {
-				if (player.getItemInHand().getType() == Material.NETHER_STAR && player.getItemInHand().hasItemMeta()) {
-				
-					PlayerInventory inventory = player.getInventory();
-					
+			try {
+
+				if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK) {
+					if (player.getItemInHand().getType() == Material.NETHER_STAR
+							&& player.getItemInHand().hasItemMeta()) {
+
+						PlayerInventory inventory = player.getInventory();
+
 						if (player.getItemInHand().getItemMeta().getDisplayName().equals(plugin.runeofdestruction)) {
 							if (plugin.isEnabled("runeofdestruction")) {
 								if (!(alreadyused.containsKey(player))) {
@@ -834,8 +837,7 @@ public class PlayerListener implements Listener, Caching {
 											new BukkitRunnable() {
 												public void run() {
 													alreadyused.remove(player, player);
-													player.sendMessage(
-															plugin.prefix + " " + plugin.again);
+													player.sendMessage(plugin.prefix + " " + plugin.again);
 												}
 											}.runTaskLater(this.plugin, plugin.getDelay("runeofminions"));
 										}
@@ -1844,33 +1846,33 @@ public class PlayerListener implements Listener, Caching {
 						} else {
 							player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 						}
-					
-				} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK
-						|| act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK) {
 
-					if (player.getInventory().getItemInHand().getType() == Material.AIR) {
-						if (fireball.contains(player.getName().toString())) {
-							player.launchProjectile(Fireball.class);
+					} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK
+							|| act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK) {
 
+						if (player.getInventory().getItemInHand().getType() == Material.AIR) {
+							if (fireball.contains(player.getName().toString())) {
+								player.launchProjectile(Fireball.class);
+
+							}
 						}
-					}
-					if (player.getInventory().getItemInHand().getType() == Material.AIR) {
-						if (arrows.contains(player.getName().toString())) {
-							player.launchProjectile(Arrow.class);
+						if (player.getInventory().getItemInHand().getType() == Material.AIR) {
+							if (arrows.contains(player.getName().toString())) {
+								player.launchProjectile(Arrow.class);
+							}
 						}
 					}
 				}
+			} catch (Exception e) {
+				String i = e.toString();
 			}
-		} catch (Exception e) {
-			String i = e.toString();
-		}
 		} else {
 			System.out.println("[SkillRunes] A null player tried to use a rune?");
 		}
-}
+	}
 
 	@EventHandler
-	public void entityDamage(EntityDamageEvent event)  {
+	public void entityDamage(EntityDamageEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
@@ -1914,77 +1916,104 @@ public class PlayerListener implements Listener, Caching {
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
 		try {
-		int healthgain = plugin.configInt("Runes.runeofvampirism.healthgain");
-		if (event.getDamager() instanceof Player) {
-			Player p = (Player) event.getDamager();
-			if (event.getEntity() instanceof Player) {
-				Player player = (Player) event.getEntity();
-			if (explosions.contains(p.getName().toString())) {
-				try {
-					TNTPrimed tnt = (TNTPrimed) p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
-					Vector v = p.getLocation().getDirection().multiply(0.1);
-					tnt.setVelocity(v);
-					tnt.setFuseTicks(1);
+			int healthgain = plugin.configInt("Runes.runeofvampirism.healthgain");
+			if (event.getDamager() instanceof Player) {
+				Player p = (Player) event.getDamager();
+				
+				if (event.getEntity() instanceof Player) {
+					Player player = (Player) event.getEntity();
+					if (explosions.contains(p.getName().toString())) {
+						try {
+							TNTPrimed tnt = (TNTPrimed) p.getWorld().spawn(p.getLocation(), TNTPrimed.class);
+							Vector v = p.getLocation().getDirection().multiply(0.1);
+							tnt.setVelocity(v);
+							tnt.setFuseTicks(1);
 
-					World world = event.getEntity().getWorld();
-					world.strikeLightning(event.getEntity().getLocation());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+							World world = event.getEntity().getWorld();
+							world.strikeLightning(event.getEntity().getLocation());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 
-			}
-			if (vampire.contains(p.getName().toString())) {
-				Damageable d = (Damageable) p;
-				double health = d.getHealth();
-				double addhealth = health + healthgain;
-				p.setHealth(addhealth);
-			}
-
-			if (crippling.contains(player.getName().toString())) {
-
-				Player damager = (Player) event.getDamager();
-				player.sendMessage(plugin.prefix + " " + plugin.coloredString("Runes.runeofcrippling.cripplemessage"));
-				damager.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
-						plugin.getDuration("runeofcrippling") * 20, plugin.getAmplifier("runeofcrippling")));
-			}
-
-			if (nodmg.contains(p.getName().toString())) {
-				event.setCancelled(true);
-			}
-			if (nodmg1.contains(p.getName().toString())) {
-				event.setCancelled(true);
-			}
-			if (event.getEntity() instanceof Player) {
-
-				if (thorns.contains(player.getName().toString())) {
-					Player damager = (Player) event.getDamager();
-					Damageable d = (Damageable) damager;
-					try {
-						int reducer = plugin.configInt("Runes.runeofthorns.thornsdamage");
-						d.setHealth(d.getHealth() - reducer);
-
-					} catch (Exception e) {
-						System.out.println(e.toString());
-						System.out.println(
-								"You have a problem in your config file! Please check it! The plugin has recovered");
-						d.setHealth(d.getHealth() - 1);
 					}
-					try {
-						String damagemessage = plugin.coloredString("Runes.runeofthorns.damagermessage");
-						damager.sendMessage(plugin.prefix + ChatColor.DARK_PURPLE + " " + damagemessage);
-					} catch (Exception e) {
-						System.out.println(e.toString());
-						System.out.println("You have an error in your configuration! We recovered!");
-						damager.sendMessage(plugin.prefix + " " + ChatColor.RED
-								+ "You have been injured due to your opponent's active thorns rune!");
+					if (vampire.contains(p.getName().toString())) {
+						// add holo displays shit here allahackbar
+						if (plugin.hasHolo()) {
+						Location location = player.getLocation();
+						location.setY(location.getY()+1.5);
+						Hologram hologram = HologramsAPI.createHologram(plugin,  location);
+						TextLine textLine = hologram.appendTextLine(ChatColor.RED + "-1");
+						Location location2 = p.getLocation();
+						location2.setY(location2.getY()+1.5);
+						Hologram hologram1 = HologramsAPI.createHologram(plugin,  location2);
+						TextLine textLine1 = hologram1.appendTextLine(ChatColor.GREEN + "+1");
+						new BukkitRunnable() {
+							@Override
+							public void run() {
+								hologram.delete();
+							}
+						}.runTaskLater(this.plugin, 40);
+						new BukkitRunnable() {
+							@Override
+							public void run() {
+								hologram1.delete();
+							}
+						}.runTaskLater(this.plugin, 40);
+						}
+						
+						
+						Damageable d = (Damageable) p;
+						double health = d.getHealth();
+						double addhealth = health + healthgain;
+						p.setHealth(addhealth);
 					}
 
+					if (crippling.contains(player.getName().toString())) {
+
+						Player damager = (Player) event.getDamager();
+						player.sendMessage(
+								plugin.prefix + " " + plugin.coloredString("Runes.runeofcrippling.cripplemessage"));
+						damager.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
+								plugin.getDuration("runeofcrippling") * 20, plugin.getAmplifier("runeofcrippling")));
+					}
+
+					if (nodmg.contains(p.getName().toString())) {
+						event.setCancelled(true);
+					}
+					if (nodmg1.contains(p.getName().toString())) {
+						event.setCancelled(true);
+					}
+					if (event.getEntity() instanceof Player) {
+
+						if (thorns.contains(player.getName().toString())) {
+							Player damager = (Player) event.getDamager();
+							Damageable d = (Damageable) damager;
+							try {
+								int reducer = plugin.configInt("Runes.runeofthorns.thornsdamage");
+								d.setHealth(d.getHealth() - reducer);
+
+							} catch (Exception e) {
+								System.out.println(e.toString());
+								System.out.println(
+										"You have a problem in your config file! Please check it! The plugin has recovered");
+								d.setHealth(d.getHealth() - 1);
+							}
+							try {
+								String damagemessage = plugin.coloredString("Runes.runeofthorns.damagermessage");
+								damager.sendMessage(plugin.prefix + ChatColor.DARK_PURPLE + " " + damagemessage);
+							} catch (Exception e) {
+								System.out.println(e.toString());
+								System.out.println("You have an error in your configuration! We recovered!");
+								damager.sendMessage(plugin.prefix + " " + ChatColor.RED
+										+ "You have been injured due to your opponent's active thorns rune!");
+							}
+
+						}
+					}
 				}
 			}
-		}
-		}
 		} catch (Exception e) {
-			
+
 		}
 	}
 
@@ -2090,6 +2119,5 @@ public class PlayerListener implements Listener, Caching {
 			}
 		}
 	}
-	
 
 }

@@ -83,6 +83,11 @@ public class Main extends JavaPlugin implements Caching {
 		this.runeOfVolatileArrows();
 		this.runeOfWither();
 		// Check if effectLib is active
+		if (this.getServer().getPluginManager().isPluginEnabled("HolographicDisplays")) {
+			System.out.println("[SkillRunes] HoloDisplays found! Enabling support");
+		} else if (!(this.getServer().getPluginManager().isPluginEnabled("HolographicDisplays"))) {
+			System.out.println("[SkillRunes] HoloDisplays not found! Holograms will not be displayed ingame!");
+		}
 		if (this.hasParticles()) {
 			System.out.println("[SkillRunes] EffectLib found! Enabling your effects!");
 		} else if (!(this.hasParticles())) {
@@ -151,7 +156,18 @@ public class Main extends JavaPlugin implements Caching {
 	// METHODS BELOW FoR RUNE INITIALIZATION AND CONFIGURATION STRING/INT/BOOLEAN GETTERS!
 	@Override
 	public void onDisable() {
-
+		System.out.println("[SkillRunes] Active hashmaps/lists have been cleared!");
+        alreadyused.clear();
+        nodmg.clear();
+        nodmg1.clear();
+        vampire.clear();
+        explosions.clear();
+        barrage.clear();
+        explosivearrows.clear();
+        molotov.clear();
+        crippling.clear();
+        lightning.clear();
+        waterwalking.clear();
 	}
 
 	public String getUseMessage() {
@@ -167,7 +183,17 @@ public class Main extends JavaPlugin implements Caching {
 		}
 
 	}
-
+	public boolean hasHolo() {
+		boolean i = false;
+		if (this.getServer().getPluginManager().isPluginEnabled("HolographicDisplays")) {
+			i = true;
+			return i;
+		} else {
+			i = false;
+			return i;
+		}
+	}
+ 
 	public String getPluginPrefix() {
 		String i = "null";
 		try {
