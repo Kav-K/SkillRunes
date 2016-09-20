@@ -28,8 +28,12 @@ public class Main extends JavaPlugin implements Caching {
 
 	@Override
 	public void onEnable() {
+		try {
 		loadConfiguration();
-		this.reloadConfig();
+		this.reloadConfig(); } catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("[SkillRunes] Configuration error! Please check your string endings and spacing! Remember, no TABS are allowed!");
+		}
 		// check if we can read from config!
 		try {
 			System.out.println(this.getConfig().getString("Runes.runeofspeed.lore1"));
@@ -153,7 +157,23 @@ public class Main extends JavaPlugin implements Caching {
 	public String disabledmessage = this.getDisabledMessage();
 	public String again = this.getYouMayUseAgainMessage();
 
-	// METHODS BELOW FoR RUNE INITIALIZATION AND CONFIGURATION STRING/INT/BOOLEAN GETTERS!
+	
+	
+	//CONFIG HELP MENU
+	public String helpline1 = this.coloredString("helplineone");
+	public String helpline2 = this.coloredString("helplinetwo");
+	public String helpline3 = this.coloredString("helplinethree");
+	public String helpline4 = this.coloredString("helplinefour");
+	public String helpline5 = this.coloredString("helplinefive");
+	public String helpline6 = this.coloredString("helplinesix");
+	public String helpline7 = this.coloredString("helplineseven");
+	public String helpline8 = this.coloredString("helplineeight");
+	public String helpline9 = this.coloredString("helplinenine");
+	
+	
+	
+	
+	// METHODS BELOW FOR RUNE INITIALIZATION AND CONFIGURATION STRING/INT/BOOLEAN GETTERS!
 	@Override
 	public void onDisable() {
 		System.out.println("[SkillRunes] Active hashmaps/lists have been cleared!");

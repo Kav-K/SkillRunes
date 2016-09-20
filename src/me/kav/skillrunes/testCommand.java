@@ -76,7 +76,7 @@ public class testCommand implements CommandExecutor, Caching {
 							sender.sendMessage(plugin.prefix + ChatColor.RED + " You gave " + rune + " to "
 									+ player1.getName().toString());
 							player1.sendMessage(plugin.prefix + ChatColor.RED + " You recieved " + rune);
-
+                                                             
 						} else {
 							sender.sendMessage(plugin.prefix + ChatColor.RED + " Invalid rune!");
 						}
@@ -97,6 +97,20 @@ public class testCommand implements CommandExecutor, Caching {
 
 		} else if (alias.equalsIgnoreCase("Runes") && args.length == 1 && args[0].equals("help")) {
 			if (sender.hasPermission("runes.help") || sender.isOp()) {
+				try { 
+					sender.sendMessage(plugin.helpline1);
+					sender.sendMessage(plugin.helpline2);
+					sender.sendMessage(plugin.helpline3);
+					sender.sendMessage(plugin.helpline4);
+					sender.sendMessage(plugin.helpline5);
+					sender.sendMessage(plugin.helpline6);
+					sender.sendMessage(plugin.helpline7);
+					sender.sendMessage(plugin.helpline8);
+					sender.sendMessage(plugin.helpline9);
+					
+					
+					
+				} catch (Exception e) {
 				sender.sendMessage(ChatColor.RED + "================== " + ChatColor.YELLOW + "SkillRunes "
 						+ ChatColor.RED + "================");
 				sender.sendMessage(ChatColor.YELLOW + "/runes help - " + ChatColor.RED + "Shows this page");
@@ -107,7 +121,9 @@ public class testCommand implements CommandExecutor, Caching {
 						+ "Give a rune to a player");
 				sender.sendMessage(ChatColor.YELLOW + "/runes reload - " + ChatColor.RED + "Reload config and plugin");
 				sender.sendMessage(ChatColor.RED + "================== " + ChatColor.YELLOW + "SkillRunes "
-						+ ChatColor.RED + "================");
+						+ ChatColor.RED + "================"); 
+				e.printStackTrace();
+				System.out.println("[SkillRunes] Error in configuration! Help line section!");}
 			} else {
 				sender.sendMessage(plugin.prefix + " " + ChatColor.RED + "You dont have permission!");
 			}

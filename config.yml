@@ -17,6 +17,15 @@ regionblockedmessage: '&cYou may not use runes in this region'
 ##     At the moment, you may NOT add more lore lines, use the existing ones and
 ##                              edit them!
 ##
+helplineone: '&c&l============ &e&lSkillRunes &c&l==========='
+helplinetwo: ''
+helplinethree: '&e/runes help &8- &cShows the help page'
+helplinefour: '&e/runes list &8- &cShows a full list of the runes' 
+helplinefive: '&e/runes give <player> <rune> &8- &cGive a player a rune'
+helplinesix: '&e/runes give all <player> &8- &cGive a player ALL the runes!'
+helplineseven: '&e/runes reload &8- &cReload the plugin and configuration!'
+helplineeight: ''
+helplinenine: '&c&l============ &e&lSkillRunes &c&l==========='
 Runes:
   runeofspeed:
   # The name and the 3 lore lines of the rune

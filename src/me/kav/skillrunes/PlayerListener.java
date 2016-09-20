@@ -200,6 +200,29 @@ public class PlayerListener implements Listener, Caching {
 									for (Entity e : player.getNearbyEntities(4, 256, 4)) {
 										if (e instanceof Player) {
 											Player found = (Player) e;
+											if (plugin.hasHolo() && plugin.isHoloEnabled("runeofparalyzing")) {
+												try {
+												// TODO Copy this over to everywhere else!
+												final Hologram hologram = HologramsAPI.createHologram(plugin, found.getLocation().add(0.0, 2.0, 0.0));
+												hologram.appendTextLine(ChatColor.BLUE + ChatColor.BOLD.toString() + "Paralyzed");
+												new BukkitRunnable() {
+													int ticksRun;
+													@Override
+													public void run(){ 
+														ticksRun++;
+														hologram.teleport(found.getLocation().add(0.0, 2.0, 0.0));
+														if (ticksRun > plugin.getDuration("runeofparalyzing")*20){ 
+															hologram.delete();
+															cancel();
+														}
+													}
+												}.runTaskTimer(plugin, 1L, 1L);
+												} catch (Exception e1) {
+													e1.printStackTrace();
+													System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+													
+												}
+											}
 											if (plugin.hasParticles()) {
 												EffectManager em = new EffectManager(plugin);
 												WarpEffect smokeEffect = new WarpEffect(em);
@@ -268,11 +291,35 @@ public class PlayerListener implements Listener, Caching {
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
 									lightning.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeoflightningarrows")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeoflightningarrows);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeoflightningarrows")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 										@Override
 										public void run() {
 											try {
 												lightning.remove(player.getName().toString());
+												cancel();
 											} catch (Exception e) {
 
 											}
@@ -283,8 +330,10 @@ public class PlayerListener implements Listener, Caching {
 										@Override
 										public void run() {
 											alreadyused.remove(player, player);
+											
 
 											player.sendMessage(plugin.prefix + " " + plugin.again);
+											cancel();
 
 										}
 									}.runTaskLater(this.plugin, plugin.getDelay("runeoflightningarrows") * 20);
@@ -307,16 +356,41 @@ public class PlayerListener implements Listener, Caching {
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
 									poison.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofpoisonarrows")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofpoisonousarrows);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofpoisonarrows")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 										@Override
 										public void run() {
 											try {
 												poison.remove(player.getName().toString());
+												player.sendMessage(plugin.prefix + " "
+														+ plugin.coloredString("Runes.runeofpoisonarrows.expiremessage"));
+												cancel();
 											} catch (Exception e) {
 
 											}
-											player.sendMessage(plugin.prefix + " "
-													+ plugin.coloredString("Runes.runeofpoisonarrows.expiremessage"));
+											
 										}
 									}.runTaskLater(this.plugin,
 											plugin.configInt("Runes.runeofpoisonarrows.abilityduration") * 20);
@@ -366,7 +440,7 @@ public class PlayerListener implements Listener, Caching {
 										}
 
 									}
-								}.runTaskLater(this.plugin, plugin.getDuration("runeofcrippling") * 20);
+								}.runTaskLater(this.plugin, plugin.configInt("Runes.runeofcrippling.abilityduration") * 20);
 							} else {
 								player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 							}
@@ -383,6 +457,29 @@ public class PlayerListener implements Listener, Caching {
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofrepellant")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofrepellant);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofrepellant")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofrepellant")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -467,6 +564,29 @@ public class PlayerListener implements Listener, Caching {
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
 									fireball.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofflamethrowing")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofflamethrowing);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofflamethrowing")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 										@Override
 										public void run() {
@@ -503,6 +623,29 @@ public class PlayerListener implements Listener, Caching {
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
 									molotov.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofflamingarrows")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeoffirespreading);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofflamingarrows")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofflamingarrows")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -566,9 +709,33 @@ public class PlayerListener implements Listener, Caching {
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
+									
 									for (Entity e : player.getNearbyEntities(radius, 256, radius)) {
 										if (e instanceof Player) {
 											Player found = (Player) e;
+											if (plugin.hasHolo() && plugin.isHoloEnabled("runeofincineration")) {
+												try {
+												// TODO Copy this over to everywhere else!
+												final Hologram hologram = HologramsAPI.createHologram(plugin, found.getLocation().add(0.0, 2.0, 0.0));
+												hologram.appendTextLine(ChatColor.RED + ChatColor.BOLD.toString() + "Incinerated");
+												new BukkitRunnable() {
+													int ticksRun;
+													@Override
+													public void run(){ 
+														ticksRun++;
+														hologram.teleport(found.getLocation().add(0.0, 2.0, 0.0));
+														if (ticksRun > plugin.configInt("Runes.runeofincineration.firetime")*20){ 
+															hologram.delete();
+															cancel();
+														}
+													}
+												}.runTaskTimer(plugin, 1L, 1L);
+												} catch (Exception e1) {
+													e1.printStackTrace();
+													System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+													
+												}
+											}
 											if (plugin.particleson("runeofincineration")) {
 												if (plugin.hasParticles()) {
 													EffectManager em = new EffectManager(plugin);
@@ -587,6 +754,7 @@ public class PlayerListener implements Listener, Caching {
 																						// here
 													smokeEffect.color = Color.AQUA;
 													smokeEffect.start();
+													
 													new BukkitRunnable() {
 														@Override
 														public void run() {
@@ -708,6 +876,29 @@ public class PlayerListener implements Listener, Caching {
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofstrength")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofstrength);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofstrength")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e) {
+											e.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofstrength")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -732,6 +923,7 @@ public class PlayerListener implements Listener, Caching {
 									player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,
 											plugin.getDuration("runeofstrength") * 20,
 											plugin.getAmplifier("runeofstrength")));
+									
 									new BukkitRunnable() {
 
 										@Override
@@ -831,6 +1023,29 @@ public class PlayerListener implements Listener, Caching {
 											+ " As you use this mythical rune, it shatters into pieces.");
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofminions")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofminions);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofminions")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									for (Entity e : player.getNearbyEntities(5, 256, 5)) {
 										if (e instanceof Player) {
 
@@ -885,6 +1100,29 @@ public class PlayerListener implements Listener, Caching {
 											+ " As you use this mythical rune, it shatters into pieces.");
 									player.setAllowFlight(true);
 									player.setFlying(true);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofflying")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofflying);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofflying")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 
 										@Override
@@ -976,6 +1214,29 @@ public class PlayerListener implements Listener, Caching {
 
 									}
 									vampire.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofvampirism")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofvampirism);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofvampirism")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 
 										@Override
@@ -1021,6 +1282,29 @@ public class PlayerListener implements Listener, Caching {
 									alreadyused.put(player, player);
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofleaping")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofleaping);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofleaping")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofleaping")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -1116,6 +1400,29 @@ public class PlayerListener implements Listener, Caching {
 									}
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofthorns")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofthorns);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofthorns")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofthorns")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -1182,6 +1489,29 @@ public class PlayerListener implements Listener, Caching {
 									player.sendMessage(
 											ChatColor.GRAY + "As you use this mythical rune, it shatters into pieces");
 									player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 400, 0));
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofbreathing")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofbreathing);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofbreathing")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.hasParticles()) {
 										EffectManager em = new EffectManager(plugin);
 										WarpEffect smokeEffect = new WarpEffect(em);
@@ -1244,6 +1574,29 @@ public class PlayerListener implements Listener, Caching {
 										}
 									}
 									alreadyused.put(player, player);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofprotection")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofprotection);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofprotection")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 
 										@Override
@@ -1293,6 +1646,29 @@ public class PlayerListener implements Listener, Caching {
 									for (Entity e : player.getNearbyEntities(radius, radius, radius)) {
 										if (e instanceof Player) {
 											Player found = (Player) e;
+											if (plugin.hasHolo() && plugin.isHoloEnabled("runeofsickening")) {
+												try {
+												// TODO Copy this over to everywhere else!
+												final Hologram hologram = HologramsAPI.createHologram(plugin, found.getLocation().add(0.0, 2.0, 0.0));
+												hologram.appendTextLine(ChatColor.DARK_PURPLE + "Poisoned");
+												new BukkitRunnable() {
+													int ticksRun;
+													@Override
+													public void run(){ 
+														ticksRun++;
+														hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+														if (ticksRun > plugin.getDuration("runeofsickening")*20){ 
+															hologram.delete();
+															cancel();
+														}
+													}
+												}.runTaskTimer(plugin, 1L, 1L);
+												} catch (Exception e1) {
+													e1.printStackTrace();
+													System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+													
+												}
+											}
 											if (plugin.particleson("runeofsickening")) {
 												if (plugin.hasParticles()) {
 													EffectManager em = new EffectManager(plugin);
@@ -1345,7 +1721,7 @@ public class PlayerListener implements Listener, Caching {
 							}
 						} else if (player.getItemInHand().getItemMeta().getDisplayName()
 								.equals(plugin.runeofillumination)) {
-							if (plugin.isEnabled("runeofdestruction")) {
+							if (plugin.isEnabled("runeoflaunching")) {
 								if (!(alreadyused.containsKey(player))) {
 									if (player.getInventory().getItemInHand().getAmount() == 1) {
 										inventory.removeItem(player.getInventory().getItemInHand());
@@ -1378,6 +1754,29 @@ public class PlayerListener implements Listener, Caching {
 									}
 									player.sendMessage(plugin.prefix + " "
 											+ plugin.coloredString("Runes.runeoflaunching.launchmessage"));
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeoflaunching")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofillumination);
+										new BukkitRunnable() { // yes
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeoflaunching")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 
 										@Override
@@ -1424,6 +1823,29 @@ public class PlayerListener implements Listener, Caching {
 											plugin.configInt("Runes.runeofblinding.radius"))) {
 										if (e instanceof Player) {
 											Player found = (Player) e;
+											if (plugin.hasHolo() && plugin.isHoloEnabled("runeofblinding")) {
+												try {
+												// TODO Copy this over to everywhere else!
+												final Hologram hologram = HologramsAPI.createHologram(plugin, found.getLocation().add(0.0, 2.0, 0.0));
+												hologram.appendTextLine(ChatColor.DARK_GRAY + "Blinded");
+												new BukkitRunnable() {
+													int ticksRun;
+													@Override
+													public void run(){ 
+														ticksRun++;
+														hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+														if (ticksRun > plugin.getDuration("runeofblinding")*20){ 
+															hologram.delete();
+															cancel();
+														}
+													}
+												}.runTaskTimer(plugin, 1L, 1L);
+												} catch (Exception e1) {
+													e1.printStackTrace();
+													System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+													
+												}
+											}
 											if (plugin.particleson("runeofblinding")) {
 												if (plugin.hasParticles()) {
 													EffectManager em = new EffectManager(plugin);
@@ -1534,6 +1956,29 @@ public class PlayerListener implements Listener, Caching {
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									alreadyused.put(player, player);
 									waterwalking.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofwaterwalking")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofwaterwalking);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofwaterwalking")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 										@Override
 										public void run() {
@@ -1572,6 +2017,29 @@ public class PlayerListener implements Listener, Caching {
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									alreadyused.put(player, player);
 									arrows.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofarrowaffinity")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofarrowaffinity);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofarrowaffinity")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 										public void run() {
 											try {
@@ -1607,6 +2075,29 @@ public class PlayerListener implements Listener, Caching {
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									alreadyused.put(player, player);
 									barrage.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofbarraging")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofbaraging);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofbarraging")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 								}
 								new BukkitRunnable() {
 
@@ -1647,6 +2138,29 @@ public class PlayerListener implements Listener, Caching {
 											+ plugin.coloredString("Runes.runeofextremepower.activatemessage"));
 									alreadyused.put(player, player);
 									explosions.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofextremepower")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofextremepower);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofextremepower")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 
 										@Override
@@ -1687,6 +2201,29 @@ public class PlayerListener implements Listener, Caching {
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									alreadyused.put(player, player);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofregeneration")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofregeneration);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofregeneration")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofregeneration")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -1736,6 +2273,29 @@ public class PlayerListener implements Listener, Caching {
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									alreadyused.put(player, player);
 									explosivearrows.add(player.getName().toString());
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofvolatilearrows")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofvolatilearrows);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofvolatilearrows")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									new BukkitRunnable() {
 										@Override
 										public void run() {
@@ -1773,6 +2333,29 @@ public class PlayerListener implements Listener, Caching {
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									alreadyused.put(player, player);
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofhaste")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofhaste);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofhaste")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e1) {
+											e1.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									if (plugin.particleson("runeofhaste")) {
 										if (plugin.hasParticles()) {
 											EffectManager em = new EffectManager(plugin);
@@ -1820,12 +2403,36 @@ public class PlayerListener implements Listener, Caching {
 									player.getInventory().getItemInHand()
 											.setAmount(player.getInventory().getItemInHand().getAmount() - 1);
 									alreadyused.put(player, player);
+									
 									player.sendMessage(plugin.prefix + " " + plugin.usemessage);
 									for (Entity e : player.getNearbyEntities(
 											plugin.configInt("Runes.runeofwither.radius"), 256,
 											plugin.configInt("Runes.runeofwither.radius"))) {
 										if (e instanceof Player) {
 											Player found = (Player) e;
+											if (plugin.hasHolo() && plugin.isHoloEnabled("runeofwither")) {
+												try {
+												// TODO Copy this over to everywhere else!
+												final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+												hologram.appendTextLine(ChatColor.GRAY + "Withered");
+												new BukkitRunnable() {
+													int ticksRun;
+													@Override
+													public void run(){ 
+														ticksRun++;
+														hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+														if (ticksRun > plugin.getDuration("runeofwither")*20){ 
+															hologram.delete();
+															cancel();
+														}
+													}
+												}.runTaskTimer(plugin, 1L, 1L);
+												} catch (Exception e1) {
+													e1.printStackTrace();
+													System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+													
+												}
+											}
 											if (plugin.particleson("runeofwither")) {
 												if (plugin.hasParticles()) {
 													EffectManager em = new EffectManager(plugin);
@@ -1870,8 +2477,7 @@ public class PlayerListener implements Listener, Caching {
 							player.sendMessage(plugin.prefix + " " + plugin.disabledmessage);
 						}
 
-					} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK
-							|| act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK) {
+					} else if (act == Action.RIGHT_CLICK_AIR || act == Action.RIGHT_CLICK_BLOCK || act == Action.LEFT_CLICK_AIR) {
 
 						if (player.getInventory().getItemInHand().getType() == Material.AIR) {
 							if (fireball.contains(player.getName().toString())) {
@@ -1998,6 +2604,29 @@ public class PlayerListener implements Listener, Caching {
 								plugin.prefix + " " + plugin.coloredString("Runes.runeofcrippling.cripplemessage"));
 						damager.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
 								plugin.getDuration("runeofcrippling") * 20, plugin.getAmplifier("runeofcrippling")));
+						if (plugin.hasHolo() && plugin.isHoloEnabled("runeofcrippling")) {
+							try {
+							// TODO Copy this over to everywhere else!
+							final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+							hologram.appendTextLine(ChatColor.GRAY + "Crippled");
+							new BukkitRunnable() {
+								int ticksRun;
+								@Override
+								public void run(){ 
+									ticksRun++;
+									hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+									if (ticksRun > plugin.getDuration("runeofcrippling")*20){ 
+										hologram.delete();
+										cancel();
+									}
+								}
+							}.runTaskTimer(plugin, 1L, 1L);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+								
+							}
+						}
 					}
 
 					if (nodmg.contains(p.getName().toString())) {
