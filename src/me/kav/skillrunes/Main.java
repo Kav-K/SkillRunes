@@ -193,7 +193,26 @@ public class Main extends JavaPlugin implements Caching {
 			return i;
 		}
 	}
- 
+    public boolean isHoloEnabled(String string) {
+    	boolean i = false;
+    	try {
+    		if (this.configBoolean("Runes."+string+".holograms")) {
+    			i = true;
+    			return i;
+    		} else {
+    			i = false;
+    			return i;
+    		}
+    		
+    	} catch (Exception e) {
+    		i = false;
+    		e.printStackTrace();
+    		return i;
+    	}
+    	
+    	
+    	
+    }
 	public String getPluginPrefix() {
 		String i = "null";
 		try {

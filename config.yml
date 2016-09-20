@@ -47,6 +47,7 @@ Runes:
     expiremessage: '&cThe effects of the rune of speed have now run out'
     particles: true
     delay: 20
+    holograms: true
   runeofinvisibility:
     name: '&b&lRune of Invisibility'
     lore1: '&7Hide thyself from thy enemies'
@@ -56,6 +57,7 @@ Runes:
     expiremessage: '&cThe effects of the rune of speed have now run out'
     enabled: true
     delay: 20
+    holograms: true
   runeofdestruction:
     name: '&c&lRune of Destruction'
     lore1: '&7Create an explosion at your feet'
@@ -65,6 +67,7 @@ Runes:
     delay: 20
     selfdamage: false
     explodeticks: 3
+    holograms: true
   runeofincineration:
     name: '&5&lRune of Incineration'
     lore1: '&7Burn enemies around you'
@@ -76,6 +79,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeoflaunching:
     name: '&c&lRune of Launching'
     lore1: '&7Launch thy body into the sky'
@@ -89,6 +93,7 @@ Runes:
     upwardslaunchvector: 10
     horizontalvector1: 0
     horizontalvector2: 0
+    holograms: true
     launchmessage: '&bPrepare to be launched!'
   runeofsickening:
     name: '&5&lRune of Sickening'
@@ -102,6 +107,7 @@ Runes:
     radius: 3
     particles: true
     delay: 20
+    holograms: true
   runeofhealing:
     name: '&c&lRune of Healing'
     lore1: '&7Heal thyself to full health'
@@ -111,6 +117,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofprotection:
     name: '&6&lRune of Protection'
     lore1: '&7Immortality for a period of time'
@@ -121,6 +128,7 @@ Runes:
     particles: true
     expiremessage: '&cThe effects of the rune of protection have run out'
     delay: 20
+    holograms: true
   runeofblinding:
     name: '&5&lRune of Blinding'
     lore1: '&7Blind those around you'
@@ -131,6 +139,7 @@ Runes:
     radius: 5
     particles: true
     delay: 20
+    holograms: true
   runeofarrowaffinity:
     name: '&c&lRune of Arrow Affinity'
     lore1: '&7Shoot arrows from your hand!'
@@ -143,6 +152,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofclarity:
     name: '&f&lRune of Clarity'
     lore1: '&7Clear all potion effects from thyself'
@@ -152,6 +162,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofwaterwalking:
     name: '&b&lRune of Water Walking'
     lore1: '&7Walk on water for a period of time'
@@ -162,6 +173,7 @@ Runes:
     particles: true
     expiremessage: '&cThe effects of water walking have run out'
     delay: 20
+    holograms: true
   runeoflightning:
     name: '&5&lRune of Lightning'
     lore1: '&7Strike down lightning on nearby enemies'
@@ -172,6 +184,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofextremepower:
     name: '&c&lRune of Extreme Power'
     lore1: '&7WREAK HAVOC ON THY ENEMIES'
@@ -184,6 +197,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofwither:
     name: '&5&lRune of Wither'
     lore1: '&7Wither enemies nearby'
@@ -195,6 +209,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofvampirism:
     name: '&c&lRune of Vampirism'
     lore1: '&7Steal health from your enemies as you hit'
@@ -205,6 +220,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
     expiremessage: 'The effects of the rune of vampirism have run out..'
   runeofbarraging:
     name: '&a&lRune of Barraging'
@@ -217,6 +233,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofregeneration:
     name: '&c&lRune of Regeneration'
     lore1: '&7Regenerate your health'
@@ -227,6 +244,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofvolatilearrows:
     name: '&a&lRune of Volatile Arrows'
     lore1: '&7Arrows explode on hit!'
@@ -237,6 +255,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofthorns:
     name: '&c&lRune of Thorns'
     lore1: '&7Injure those who dare hurt you'
@@ -248,6 +267,7 @@ Runes:
     particles: true
     damagermessage: '&cYou have been injured due to your opponents thorns!'
     thornsdamage: 1
+    holograms: true
   runeofrepair:
     name: '&c&lRune of Repair'
     lore1: '&7Repair your armor to full durability'
@@ -255,6 +275,7 @@ Runes:
     lore3: '&cSpecial Rune'
     enabled: true
     delay: 20
+    holograms: true
   runeofleaping:
     name: '&b&lRune of Leaping'
     lore1: '&7Jump like a rabbit'
@@ -265,6 +286,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofflying:
     name: '&c&lRune of Flying'
     lore1: '&7Gain flight powers for a duration of time'
@@ -273,6 +295,7 @@ Runes:
     expiremessage: '&cThe effects of the rune of flying have run out..'
     duration: 20
     enabled: true
+    holograms: true
   runeofflamingarrows:
     name: '&a&lRune of Flaming Arrows'
     lore1: '&7Spread patches of fire with your arrows'
@@ -282,6 +305,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
     expiremessage: '&cThe effects of the rune of flaming arrows have run out'
   runeofflamethrowing:
     name: '&c&lRune of FlameThrowing'
@@ -292,6 +316,7 @@ Runes:
     duration: 20
     enabled: true
     delay: 20
+    holograms: true
     expiremessage: '&cThe effects of the rune of flamethrowing have run out'
   runeofrepellant:
     name: '&6&lRune of Repellant'
@@ -304,6 +329,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeoflightningarrows:
     name: '&a&lRune of Lightning Arrows'
     lore1: '&7Summon lightning on arrow hit'
@@ -312,6 +338,7 @@ Runes:
     duration: 20
     enabled: true
     delay: 20
+    holograms: true
   runeofpoisonarrows:
     name: '&a&lRune of Poison Arrows'
     lore1: '&7Poison nearby enemies on arrow hit'
@@ -325,6 +352,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofhaste:
     name: '&b&lRune of Haste'
     lore1: '&7Dig and Hit faster'
@@ -335,6 +363,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofcrippling:
     name: '&c&lRune of Crippling'
     lore1: '&7Weaken those you hit!'
@@ -347,6 +376,7 @@ Runes:
     duration: 3
     enabled: true
     delay: 20
+    holograms: true
   runeofminions:
     name: '&4&lRune of Minions'
     lore1: '&7Spawn helpers where your enemies stand'
@@ -357,6 +387,7 @@ Runes:
     minionname: 'Minion boi!'
     minionlivetime: 30
     enabled: true
+    holograms: true
     delay: 20
   runeofbreathing:
     name: '&b&lRune of Breathing'
@@ -368,6 +399,7 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true
   runeofparalyzing:
     name: '&4&lRune of Paralyzing'
     lore1: '&7Paralyze those around you'
@@ -377,3 +409,4 @@ Runes:
     enabled: true
     particles: true
     delay: 20
+    holograms: true

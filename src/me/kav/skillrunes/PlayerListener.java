@@ -653,6 +653,29 @@ public class PlayerListener implements Listener, Caching {
 											}, plugin.getDuration("runeofspeed") * 20L);
 										}
 									}
+									if (plugin.hasHolo() && plugin.isHoloEnabled("runeofspeed")) {
+										try {
+										// TODO Copy this over to everywhere else!
+										final Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation().add(0.0, 2.0, 0.0));
+										hologram.appendTextLine(plugin.runeofspeed);
+										new BukkitRunnable() {
+											int ticksRun;
+											@Override
+											public void run(){ 
+												ticksRun++;
+												hologram.teleport(player.getLocation().add(0.0, 2.0, 0.0));
+												if (ticksRun > plugin.getDuration("runeofspeed")*20){ 
+													hologram.delete();
+													cancel();
+												}
+											}
+										}.runTaskTimer(plugin, 1L, 1L);
+										} catch (Exception e) {
+											e.printStackTrace();
+											System.out.println("[SkillRunes] Unexpected error! Please report this to the developer");
+											
+										}
+									}
 									player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
 											plugin.getDuration("runeofspeed") * 20,
 											plugin.getAmplifier("runeofspeed")));
