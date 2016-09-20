@@ -177,7 +177,7 @@ public class Main extends JavaPlugin implements Caching {
 	@Override
 	public void onDisable() {
 		System.out.println("[SkillRunes] Active hashmaps/lists have been cleared!");
-        alreadyused.clear();
+        alreadyused1.clear();
         nodmg.clear();
         nodmg1.clear();
         vampire.clear();

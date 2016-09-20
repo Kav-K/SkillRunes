@@ -3,9 +3,9 @@ prefix: '&e&lSkillRunes &7'
 #The message you see when a rune is disabled
 disabledmessage: '&cThis rune is disabled!'
 #The message you see when you try to use a rune but one is already active
-alreadyactivemessage: '&cYou already have an active rune!'
+alreadyactivemessage: '&cMax Concurrenet runes reached!'
 #The message you see when you are able to use another rune again
-youmayuseagainmessage: '&cYou may now use a rune again'
+youmayuseagainmessage: '&cOne of your runes expired!'
 #The message you see when you use a rune
 consumemessage: '&cAs you use this mythical rune, it shatters into pieces'
 #The message you see when a rune is not allowed in a specific region
@@ -17,6 +17,10 @@ regionblockedmessage: '&cYou may not use runes in this region'
 ##     At the moment, you may NOT add more lore lines, use the existing ones and
 ##                              edit them!
 ##
+
+# Maximum amount of runes players can use at a time
+maxrunes: 3
+#The text for the /runes help command
 helplineone: '&c&l============ &e&lSkillRunes &c&l==========='
 helplinetwo: ''
 helplinethree: '&e/runes help &8- &cShows the help page'
@@ -112,6 +116,9 @@ Runes:
     amplifier: 0
     duration: 3
     expiremessage: '&cThe effects of the rune of speed have now run out'
+# Add a color code at the end of the sentence to change the color of the name of the player
+    sickenermessage: '&5You have sickened'
+    sickmessage: '&5You have been sickened by'
     enabled: true
     radius: 3
     particles: true
@@ -143,6 +150,8 @@ Runes:
     lore1: '&7Blind those around you'
     lore2: '&7Right click to use'
     lore3: '&5AoE Rune'
+    blindermessage: '&8You have blinded'
+    blindmessage: '&8You have been blinded'
     duration: 20
     enabled: true
     radius: 5
@@ -275,6 +284,7 @@ Runes:
     enabled: true
     particles: true
     damagermessage: '&cYou have been injured due to your opponents thorns!'
+    expiremessage: '&cThe effect of the rune of thorns has now run out'
     thornsdamage: 1
     holograms: true
   runeofrepair:
@@ -282,6 +292,7 @@ Runes:
     lore1: '&7Repair your armor to full durability'
     lore2: '&7Right click to use'
     lore3: '&cSpecial Rune'
+    repairmessage: '&aYour armor has been repaired to full durability'
     enabled: true
     delay: 20
     holograms: true
@@ -333,6 +344,7 @@ Runes:
     lore2: '&7Right click to use'
     lore3: '&6Protection Rune' 
     expiremessage: '&cThe effects of repellant have run out'
+    repelmessage: '&6You have been repelled by'
     duration: 20
     radius: 2
     enabled: true
@@ -414,6 +426,9 @@ Runes:
     lore1: '&7Paralyze those around you'
     lore2: '&7Right click to use'
     lore3: '&4AoE Rune'
+    paralyzermessage: '&7You have paralyzed'
+    paralyzemessage: '&7You have been paralyzed by'
+    expiremessage: '&7The effects of the rune of paralyzing have run out'
     duration: 20
     enabled: true
     particles: true

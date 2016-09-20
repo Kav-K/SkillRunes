@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,7 +14,7 @@ public interface Caching {
     List<String> nodmg1 = new ArrayList<String>();
     List<String> explosions = new ArrayList<String>();
     List<String> vampire = new ArrayList<String>();
-    public static HashMap<Player, Player> alreadyused = new HashMap<Player, Player>();
+    public static HashMap<String, Integer> alreadyused1 = new HashMap<String, Integer>();
     List<String> barrage = new ArrayList<String>();
     List<String> explosivearrows = new ArrayList<String>();
     List<String> thorns = new ArrayList<String>();
